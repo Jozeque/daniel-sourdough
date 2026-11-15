@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>סדנת לחמי מחמצת עם דניאל אביב | אבן יהודה</title>
-<meta name="description" content="סדנה מעשית של 4 שעות באבן יהודה: לומדים להכין לחם מחמצת אמיתי, מהיכרות עם המחמצת ועד כיכר שתכינו במו ידיכם. יוצאים עם כיכר, גור מחמצת וחוברת הדרכה.">
+<meta name="description" content="סדנה מעשית של 4 שעות באבן יהודה: תלמדי להכין לחם מחמצת אמיתי, מהיכרות עם המחמצת ועד כיכר שתכיני במו ידייך. תצאי עם כיכר, גור מחמצת וחוברת הדרכה.">
 <meta name="theme-color" content="#F7F4EF">
 <meta name="color-scheme" content="light">
 <!-- Test link: keep out of search engines until Daniel and the quoted participants approve. Remove for the real launch. -->
@@ -14,13 +14,14 @@
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://jozeque.github.io/daniel-sourdough/">
 <meta property="og:title" content="סדנת לחמי מחמצת עם דניאל אביב">
-<meta property="og:description" content="4 שעות של ידיים בבצק, ריח של לחם ושולחן מלא. יוצאים עם כיכר, מחמצת משלכם וביטחון לאפות בבית.">
+<meta property="og:description" content="4 שעות של ידיים בבצק, ריח של לחם ושולחן מלא. תצאי עם כיכר, מחמצת משלך וביטחון לאפות בבית.">
 <meta property="og:image" content="https://jozeque.github.io/daniel-sourdough/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/img/workshop-poster.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Bellefair&display=swap">
@@ -66,7 +67,6 @@ p,li,dd{text-wrap:pretty}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
 .skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:100;background:var(--ink);color:var(--flour);padding:10px 16px;border-radius:10px;text-decoration:none}
 .skip:focus{top:12px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* buttons */
 .btn{
@@ -110,73 +110,26 @@ p,li,dd{text-wrap:pretty}
   .header-cta .short{display:none}
 }
 
-/* hero */
-.hero{padding-block:30px 60px}
-.hero-grid{display:grid;gap:44px}
+/* hero: copy, the workshop film in an oven-arch frame, the four facts */
+.hero{padding-block:26px 56px}
+.hero-grid{display:grid;gap:34px}
+.hero-text{display:contents}
+.hero-copy{order:1}
+.hero-media{order:2}
+.hero-facts{order:3}
 .kicker{font-size:1rem;font-weight:700;color:var(--crust);margin-bottom:14px}
-.hero h1{font-size:clamp(2.75rem,1.4rem + 5.6vw,5.9rem);line-height:1.02}
-.lede{margin-top:22px;font-size:1.15rem;line-height:1.65;color:var(--ink-2);max-width:31em}
-@media (min-width:980px){.lede{line-height:1.75}}
-.hero-actions{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
-.hero-media{position:relative;width:100%;max-width:500px;margin-inline:auto}
-.arch{border-radius:1000px 1000px 0 0;overflow:hidden;aspect-ratio:4/5;background:var(--linen)}
-.arch img{width:100%;height:100%;object-fit:cover}
-.hero-crumb{
-  position:absolute;inset-inline-end:2%;bottom:-8%;width:36%;aspect-ratio:1;
-  border-radius:50%;overflow:hidden;border:7px solid var(--flour);background:var(--linen);
-  box-shadow:0 22px 40px -22px rgba(42,31,23,.6);
-}
-.hero-crumb img{width:100%;height:100%;object-fit:cover}
-@media (min-width:980px){
-  .hero{padding-block:44px 96px}
-  .hero-grid{grid-template-columns:1.08fr .92fr;align-items:center;gap:72px}
-}
-@media (min-width:1240px){.hero-crumb{inset-inline-end:-9%}}
-@media (prefers-reduced-motion:no-preference){
-  .arch-rise img{animation:rise 1.5s cubic-bezier(.2,.7,.2,1) both}
-  .hero-crumb{animation:settle 1s .55s cubic-bezier(.2,.8,.25,1.15) both}
-  @keyframes rise{from{opacity:0;transform:translateY(5%) scale(1.07)}to{opacity:1;transform:none}}
-  @keyframes settle{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
-}
-
-/* facts */
-.facts{border-block:1px solid var(--rule)}
-.facts ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:1fr 1fr}
-.facts li{display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding:22px 4px 22px 14px}
-.facts li:nth-child(odd){border-inline-end:1px solid var(--rule)}
-.facts li:nth-child(even){padding-inline-start:16px}
-.facts li:nth-child(-n+2){border-bottom:1px solid var(--rule)}
-.facts svg{width:30px;height:30px;flex:none;color:var(--crust)}
-.facts strong{display:block;font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.15}
-.facts span{display:block;font-size:.93rem;line-height:1.5;color:var(--ink-2);margin-top:3px}
-@media (min-width:980px){
-  .facts ul{grid-template-columns:repeat(4,1fr)}
-  .facts li{flex-direction:row;gap:14px;padding:30px 26px}
-  .facts svg{margin-top:4px}
-  .facts strong{font-size:1.62rem}
-  .facts li:nth-child(n){border-bottom:0;border-inline-end:0}
-  .facts li + li{border-inline-start:1px solid var(--rule)}
-  .facts li:first-child{padding-inline-start:0}
-}
-
-/* sections */
-.section{padding-block:76px}
-@media (min-width:980px){.section{padding-block:116px}}
-.section-linen{background-color:var(--linen)}
-.h2{font-size:clamp(2.4rem,1.6rem + 3vw,3.9rem)}
-.intro{margin-top:16px;font-size:1.15rem;color:var(--ink-2);max-width:38em}
-
-/* film */
-.film-grid{display:grid;gap:40px;align-items:center}
-.film-copy p{margin-top:18px;font-size:1.15rem;color:var(--ink-2);max-width:30em}
+.hero h1{font-size:clamp(2.75rem,1.4rem + 5.6vw,5.3rem);line-height:1.02}
+.lede{margin-top:20px;font-size:1.15rem;line-height:1.65;color:var(--ink-2);max-width:31em}
+.hero-actions{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
+.hero-media{position:relative;width:min(78vw,360px);margin-inline:auto}
 .film{
-  position:relative;width:min(84vw,400px);margin-inline:auto;aspect-ratio:9/16;
-  border-radius:30px;overflow:hidden;background:#2A1F17;
+  position:relative;aspect-ratio:9/16;overflow:hidden;background:#2A1F17;
+  border-radius:50% 50% 6% 6% / 28.125% 28.125% 3.4% 3.4%;
   box-shadow:0 40px 70px -40px rgba(42,31,23,.7);
 }
 .film video{width:100%;height:100%;object-fit:cover}
 .film-toggle{
-  position:absolute;inset-inline-start:14px;bottom:14px;width:46px;height:46px;border-radius:50%;
+  position:absolute;inset-inline-start:16px;bottom:16px;width:46px;height:46px;border-radius:50%;
   border:0;cursor:pointer;display:grid;place-items:center;color:#FBF6EE;
   background:rgba(32,23,17,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
 }
@@ -184,29 +137,48 @@ p,li,dd{text-wrap:pretty}
 .film-toggle .i-play{display:none}
 .film-toggle[data-state="paused"] .i-play{display:block}
 .film-toggle[data-state="paused"] .i-pause{display:none}
+.hero-crumb{
+  position:absolute;inset-inline-end:-8%;bottom:-5%;width:36%;aspect-ratio:1;
+  border-radius:50%;overflow:hidden;border:6px solid var(--flour);background:var(--linen);
+  box-shadow:0 22px 40px -22px rgba(42,31,23,.6);
+}
+.hero-crumb img{width:100%;height:100%;object-fit:cover}
+.hero-facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
+.hero-facts li{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:18px 4px 18px 12px;border-bottom:1px solid var(--rule)}
+.hero-facts li:nth-child(odd){border-inline-end:1px solid var(--rule)}
+.hero-facts li:nth-child(even){padding-inline-start:14px}
+.hero-facts svg{width:28px;height:28px;flex:none;color:var(--crust)}
+.hero-facts strong{display:block;font-family:var(--serif);font-weight:400;font-size:1.45rem;line-height:1.15}
+.hero-facts span{display:block;font-size:.92rem;line-height:1.45;color:var(--ink-2);margin-top:2px}
 @media (min-width:980px){
-  .film-grid{grid-template-columns:1fr 400px;gap:96px}
-  .film{width:400px}
+  .hero{padding-block:36px 80px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) 380px;column-gap:88px;align-items:center}
+  .hero-text{display:block}
+  .hero-media{width:380px}
+  .hero-facts{margin-top:44px}
+  .hero-facts li{flex-direction:row;gap:12px;padding:16px 0 16px 16px}
+  .hero-facts li:nth-child(even){padding-inline-start:18px}
+  .hero-facts svg{margin-top:3px}
+  .hero-crumb{inset-inline-end:-17%;bottom:-4%;width:40%}
+}
+@media (prefers-reduced-motion:no-preference){
+  .arch-rise video,.arch-rise img{animation:rise 1.5s cubic-bezier(.2,.7,.2,1) both}
+  .hero-crumb{animation:settle 1s .55s cubic-bezier(.2,.8,.25,1.15) both}
+  @keyframes rise{from{opacity:0;transform:translateY(5%) scale(1.07)}to{opacity:1;transform:none}}
+  @keyframes settle{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
 }
 
-/* for you */
-.foryou-grid{display:grid;gap:44px}
-.foryou-photo{border-radius:26px;overflow:hidden;aspect-ratio:3/2;background:var(--linen)}
-.foryou-photo img{width:100%;height:100%;object-fit:cover}
-.pains{list-style:none;margin:30px 0 0;padding:0}
-.pains li{
-  font-family:var(--serif);font-size:clamp(1.62rem,1.3rem + 1vw,2.05rem);line-height:1.34;
-  padding-block:17px;border-top:1px solid var(--rule);
-}
-.pains li:last-child{border-bottom:1px solid var(--rule)}
-.promise{margin-top:28px;font-size:1.15rem;color:var(--ink-2);max-width:32em}
-.promise strong{color:var(--ink);font-weight:700}
-@media (min-width:980px){
-  .foryou-grid{grid-template-columns:1fr 1fr;gap:88px;align-items:center}
-}
+/* sections */
+.section{padding-block:64px}
+@media (min-width:980px){.section{padding-block:92px}}
+.section-linen{background-color:var(--linen)}
+.h2{font-size:clamp(2.4rem,1.6rem + 3vw,3.9rem)}
+.intro{margin-top:16px;font-size:1.15rem;color:var(--ink-2);max-width:38em}
+.arch{border-radius:1000px 1000px 0 0;overflow:hidden;aspect-ratio:4/5;background:var(--linen)}
+.arch img{width:100%;height:100%;object-fit:cover}
 
 /* testimonials */
-.featured{margin-top:48px;max-width:880px}
+.featured{margin-top:40px;max-width:880px}
 .featured blockquote{margin:0}
 .pull{font-family:var(--serif);font-size:clamp(2.1rem,1.5rem + 2.4vw,3.4rem);line-height:1.2;color:var(--ink)}
 .pull::before{content:"״";color:var(--crust);margin-inline-end:.08em}
@@ -218,7 +190,7 @@ p,li,dd{text-wrap:pretty}
 .featured .full{margin-top:16px;color:var(--ink-2);max-width:40em}
 .featured .full p + p{margin-top:12px}
 .bubbles{
-  margin:48px calc(var(--gutter) * -1) 0;padding:4px var(--gutter) 18px;
+  margin:40px calc(var(--gutter) * -1) 0;padding:4px var(--gutter) 18px;
   display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
 }
 .bubbles::-webkit-scrollbar{display:none}
@@ -238,15 +210,48 @@ p,li,dd{text-wrap:pretty}
   .swipe-hint{display:none}
 }
 @media (min-width:1100px){.bubbles{columns:3}}
-.table-strip{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.table-strip img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;background:var(--linen)}
-.inline-cta{margin-top:52px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+.table-strip{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.table-strip img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;background:var(--flour)}
+.inline-cta{margin-top:44px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
 .inline-cta p{font-family:var(--serif);font-size:clamp(1.8rem,1.45rem + 1vw,2.35rem);line-height:1.2}
 
+/* together: the workshop in words + who it is for, one section */
+.together{display:grid;gap:22px}
+.together-lede{font-size:1.15rem;color:var(--ink-2);max-width:32em}
+.together-photos{margin-block:6px}
+.together-photos .tp-main{display:none}
+.together-photos img{width:100%;height:100%;object-fit:cover;border-radius:22px;background:var(--linen)}
+.together-photos .tp-second{aspect-ratio:3/2}
+.pains-title{font-size:clamp(1.95rem,1.55rem + 1.4vw,2.7rem);margin-top:12px}
+.pains{list-style:none;margin:0;padding:0}
+.pains li{
+  font-family:var(--serif);font-size:clamp(1.62rem,1.3rem + 1vw,2.05rem);line-height:1.34;
+  padding-block:16px;border-top:1px solid var(--rule);
+}
+.pains li:last-child{border-bottom:1px solid var(--rule)}
+.promise{font-size:1.15rem;color:var(--ink-2);max-width:32em}
+.promise strong{color:var(--ink);font-weight:700}
+@media (min-width:980px){
+  .together{
+    grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:80px;row-gap:0;
+    grid-template-areas:"h2 photos" "lede photos" "ptitle photos" "pains photos" "promise photos";
+  }
+  .together > .h2{grid-area:h2}
+  .together-lede{grid-area:lede;margin-top:18px}
+  .pains-title{grid-area:ptitle;margin-top:40px}
+  .pains{grid-area:pains;margin-top:14px}
+  .promise{grid-area:promise;margin-top:24px}
+  .together-photos{
+    grid-area:photos;margin:0;contain:size;
+    display:grid;grid-template-rows:minmax(0,1fr) auto;gap:12px;
+  }
+  .together-photos .tp-main{display:block;min-height:0}
+}
+
 /* journey */
-.journey-grid{margin-top:52px;display:grid;gap:40px}
-.steps{list-style:none;margin:0;padding:0;counter-reset:step}
-.step{position:relative;padding-inline-start:64px;padding-bottom:46px}
+.journey-grid{margin-top:44px;display:grid;gap:40px}
+.steps{list-style:none;margin:0;padding:0}
+.step{position:relative;padding-inline-start:64px;padding-bottom:44px}
 .step::before{content:"";position:absolute;inset-inline-start:21px;top:52px;bottom:6px;width:1px;background:var(--rule)}
 .step:last-child{padding-bottom:0}
 .step:last-child::before{display:none}
@@ -265,7 +270,7 @@ p,li,dd{text-wrap:pretty}
 .stage{display:none}
 @media (min-width:980px){
   .journey-grid{grid-template-columns:1fr 1fr;gap:88px}
-  .step{min-height:42vh;padding-bottom:0}
+  .step{min-height:34vh;padding-bottom:0}
   .step-photo{display:none}
   .stage{
     display:block;position:sticky;top:112px;align-self:start;
@@ -274,7 +279,7 @@ p,li,dd{text-wrap:pretty}
   .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
   .stage img.is-active{opacity:1}
 }
-.after{margin-top:72px;display:grid;gap:30px;padding-top:56px;border-top:1px solid var(--rule)}
+.after{margin-top:64px;display:grid;gap:30px;padding-top:48px;border-top:1px solid var(--rule)}
 .after h3{font-size:clamp(2rem,1.65rem + 1vw,2.65rem)}
 .after > div > p{margin-top:12px;color:var(--ink-2);max-width:32em}
 .chat{display:flex;flex-direction:column;gap:10px;max-width:460px}
@@ -291,7 +296,7 @@ p,li,dd{text-wrap:pretty}
 .why-head .intro{color:var(--night-soft)}
 .why-photo{border-radius:26px;overflow:hidden;aspect-ratio:4/5;max-width:400px;background:#3A2C22}
 .why-photo img{width:100%;height:100%;object-fit:cover}
-.reasons{margin-top:56px;display:grid;border-top:1px solid var(--night-rule)}
+.reasons{margin-top:52px;display:grid;border-top:1px solid var(--night-rule)}
 .reason{padding-block:28px;border-bottom:1px solid var(--night-rule)}
 .reason h3{font-size:clamp(1.8rem,1.55rem + .7vw,2.15rem);line-height:1.15}
 .reason p{margin-top:10px;color:var(--night-soft)}
@@ -301,7 +306,7 @@ p,li,dd{text-wrap:pretty}
 .caveat strong{color:#FBF6EE}
 .signoff{margin-top:26px;font-family:var(--serif);font-size:clamp(1.8rem,1.45rem + 1.1vw,2.45rem);line-height:1.3;color:#FBF6EE;max-width:28em}
 .signoff span{display:block;margin-top:8px;font-size:1.5rem;color:var(--gold)}
-.glossary{margin-top:84px}
+.glossary{margin-top:76px}
 .glossary .intro{color:var(--night-soft)}
 .glossary dl{margin:30px 0 0;display:grid;column-gap:56px}
 .glossary dl div{padding-block:18px;border-top:1px solid var(--night-rule)}
@@ -318,14 +323,14 @@ p,li,dd{text-wrap:pretty}
 }
 
 /* about */
-.about-grid{display:grid;gap:48px}
+.about-grid{display:grid;gap:44px}
 .about-photo .arch{max-width:460px;margin-inline:auto}
 .about-copy .kicker{margin-bottom:12px}
 .about-copy .body{margin-top:22px;color:var(--ink-2);max-width:33em}
 .about-copy .body p + p{margin-top:16px}
 .closing{margin-top:26px;font-family:var(--serif);font-size:clamp(1.8rem,1.45rem + 1.1vw,2.4rem);line-height:1.3;max-width:22em}
 .sign{margin-top:12px;font-family:var(--serif);font-size:2.05rem;color:var(--crust)}
-.special{margin-top:52px}
+.special{margin-top:48px}
 .special h3{font-size:2.15rem}
 .special ul{list-style:none;margin:16px 0 0;padding:0;max-width:36em}
 .special li{padding-block:15px;border-top:1px solid var(--rule);color:var(--ink-2)}
@@ -336,7 +341,7 @@ p,li,dd{text-wrap:pretty}
 }
 
 /* faq */
-.faq-list{margin-top:36px;max-width:880px;border-top:1px solid var(--rule)}
+.faq-list{margin-top:32px;max-width:880px;border-top:1px solid var(--rule)}
 .faq-list details{border-bottom:1px solid var(--rule)}
 .faq-list summary{
   list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:22px;
@@ -351,7 +356,7 @@ p,li,dd{text-wrap:pretty}
 .final{position:relative;overflow:hidden;color:#FBF6EE;text-align:center;background:#2A1F17}
 .final picture,.final picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .final::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,21,15,.6),rgba(30,21,15,.84))}
-.final .wrap{position:relative;z-index:1;padding-block:112px}
+.final .wrap{position:relative;z-index:1;padding-block:104px}
 .final h2{color:#FBF6EE;font-size:clamp(2.75rem,1.75rem + 3.8vw,4.9rem)}
 .final p{margin:18px auto 0;max-width:28em;font-size:1.18rem;color:#EADFCF}
 .final .btn{margin-top:34px;background:#FBF6EE;color:var(--crust-deep);box-shadow:0 18px 34px -18px rgba(0,0,0,.6)}
@@ -401,8 +406,8 @@ p,li,dd{text-wrap:pretty}
       <span class="brand-sub">סדנאות לחמי מחמצת</span>
     </a>
     <nav class="nav" aria-label="ניווט בעמוד">
-      <a href="#journey">מה עושים בסדנה</a>
       <a href="#love">המלצות</a>
+      <a href="#journey">מה עושים בסדנה</a>
       <a href="#why">למה מחמצת</a>
       <a href="#daniel">על דניאל</a>
       <a href="#faq">שאלות</a>
@@ -417,76 +422,43 @@ p,li,dd{text-wrap:pretty}
 
 <section class="hero" id="top">
   <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="kicker">סדנת לחמי מחמצת באבן יהודה</p>
-      <h1>לחם מחמצת אמיתי.<br>מהידיים שלכם.</h1>
-      <p class="lede">בסדנה תלמדו להכין לחם מחמצת אמיתי, מהיכרות עם המחמצת ועד כיכר לחם שתכינו במו ידיכם. תצאו עם ידע, כלים וביטחון להמשיך לאפות בעצמכם, וליהנות מלחם ביתי, טרי וטעים גם הרבה אחרי שהסדנה מסתיימת.</p>
-      <div class="hero-actions">
-        <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
-          <svg aria-hidden="true"><use href="#i-wa"/></svg>לתאריכים ולהרשמה בוואטסאפ
-        </a>
-        <a class="text-link" href="#journey">מה עושים בסדנה</a>
+    <div class="hero-text">
+      <div class="hero-copy">
+        <p class="kicker">סדנת לחמי מחמצת באבן יהודה</p>
+        <h1>לחם מחמצת אמיתי.<br>מהידיים שלך.</h1>
+        <p class="lede">בסדנה שלי תלמדי להכין לחם מחמצת אמיתי, מהיכרות עם המחמצת ועד כיכר לחם שתכיני במו ידייך. תקבלי ידע, כלים וביטחון להמשיך לאפות בעצמך, וליהנות מלחם ביתי, טרי וטעים גם הרבה אחרי שהסדנה מסתיימת.</p>
+        <div class="hero-actions">
+          <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>לתאריכים ולהרשמה בוואטסאפ
+          </a>
+          <a class="text-link" href="#journey">מה עושים בסדנה</a>
+        </div>
       </div>
+      <ul class="hero-facts" aria-label="הסדנה בקצרה">
+        <li><svg aria-hidden="true"><use href="#i-clock"/></svg><div><strong>4 שעות</strong><span>מעשית ותיאורטית</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><strong>אבן יהודה</strong><span>סדנה אינטימית סביב שולחן אחד</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-loaf"/></svg><div><strong>יוצאת עם כיכר</strong><span>גור מחמצת וחוברת הדרכה</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-chat"/></svg><div><strong>ליווי גם אחרי</strong><span>קבוצת וואטסאפ לשאלות</span></div></li>
+      </ul>
     </div>
     <div class="hero-media">
-      <div class="arch arch-rise">
-        <img src="assets/img/hero-840.webp" srcset="assets/img/hero-560.webp 560w, assets/img/hero-840.webp 840w, assets/img/hero-1200.webp 1200w" sizes="(min-width: 980px) 500px, calc(100vw - 40px)" width="840" height="1050" alt="דניאל ומשתתפת בסדנה עובדות עם בצק ליד השיש, וצוחקות" fetchpriority="high">
+      <div class="film arch-rise">
+        <video muted playsinline loop preload="none" poster="assets/img/workshop-poster.webp" aria-label="סרטון קצר מתוך סדנת לחמי המחמצת">
+          <source src="assets/video/workshop.mp4" type="video/mp4">
+        </video>
+        <button class="film-toggle" type="button" data-state="paused" aria-label="הפעלת הסרטון">
+          <svg class="i-play" aria-hidden="true"><use href="#i-play"/></svg>
+          <svg class="i-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+        </button>
       </div>
       <div class="hero-crumb">
-        <img src="assets/img/hero-crumb-480.webp" srcset="assets/img/hero-crumb-280.webp 280w, assets/img/hero-crumb-480.webp 480w" sizes="(min-width: 980px) 180px, 36vw" width="480" height="480" alt="כיכר מחמצת חצויה עם קראמב אוורירי">
+        <img src="assets/img/hero-crumb-480.webp" srcset="assets/img/hero-crumb-280.webp 280w, assets/img/hero-crumb-480.webp 480w" sizes="(min-width: 980px) 152px, 28vw" width="480" height="480" alt="כיכר מחמצת חצויה עם קראמב אוורירי">
       </div>
     </div>
   </div>
 </section>
 
-<section class="facts" aria-label="הסדנה בקצרה">
-  <div class="wrap">
-    <ul>
-      <li><svg aria-hidden="true"><use href="#i-clock"/></svg><div><strong>4 שעות</strong><span>מעשית ותיאורטית</span></div></li>
-      <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><strong>אבן יהודה</strong><span>סדנה אינטימית סביב שולחן אחד</span></div></li>
-      <li><svg aria-hidden="true"><use href="#i-loaf"/></svg><div><strong>יוצאים עם כיכר</strong><span>גור מחמצת וחוברת הדרכה</span></div></li>
-      <li><svg aria-hidden="true"><use href="#i-chat"/></svg><div><strong>ליווי גם אחרי</strong><span>קבוצת וואטסאפ לשאלות</span></div></li>
-    </ul>
-  </div>
-</section>
-
-<section class="section" id="film" aria-labelledby="film-title">
-  <div class="wrap film-grid">
-    <div class="film-copy">
-      <h2 class="h2" id="film-title">ידיים בבצק, ריח של&nbsp;לחם ושולחן מלא</h2>
-      <p>ארבע שעות בבית שלי באבן יהודה: לומדים, מנסים בידיים, טועמים ושואלים כל מה שתמיד רציתם לדעת על מחמצת. באמצע עוצרים לבראנץ׳ של לחמי מחמצת, יין ומטעמים, ובסוף כל אחד ואחת יוצאים עם כיכר משלהם.</p>
-    </div>
-    <div class="film">
-      <video muted playsinline loop preload="none" poster="assets/img/workshop-poster.webp" aria-label="סרטון קצר מתוך סדנת לחמי המחמצת">
-        <source src="assets/video/workshop.mp4" type="video/mp4">
-      </video>
-      <button class="film-toggle" type="button" data-state="paused" aria-label="הפעלת הסרטון">
-        <svg class="i-play" aria-hidden="true"><use href="#i-play"/></svg>
-        <svg class="i-pause" aria-hidden="true"><use href="#i-pause"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
-
-<section class="section section-linen" id="for-you" aria-labelledby="foryou-title">
-  <div class="wrap foryou-grid">
-    <div>
-      <h2 class="h2" id="foryou-title">הסדנה הזאת בשבילכם, אם</h2>
-      <ul class="pains">
-        <li>אתם רוצים לדעת בדיוק מה יש בלחם שאתם אוכלים.</li>
-        <li>חלמתם להכין בבית לחם מחמצת, אבל לא ידעתם מאיפה להתחיל.</li>
-        <li>ניסיתם לבד, הבצק לא תפח או שהלחם יצא שטוח, ולא הבנתם למה.</li>
-        <li>בא לכם כמה שעות לעצמכם, עם הידיים בבצק ובחברה טובה.</li>
-      </ul>
-      <p class="promise"><strong>בסוף הסדנה תדעו להכין לחם מחמצת בעצמכם,</strong> ותדעו בדיוק מה נכנס לתוכו: קמח, מים ומלח. בלי חומרים משמרים, בלי שמרים תעשייתיים, ובלי לנחש.</p>
-    </div>
-    <div class="foryou-photo">
-      <img src="assets/img/for-you-900.webp" srcset="assets/img/for-you-600.webp 600w, assets/img/for-you-900.webp 900w, assets/img/for-you-1300.webp 1300w" sizes="(min-width: 980px) 540px, calc(100vw - 40px)" width="900" height="600" loading="lazy" decoding="async" alt="שתי משתתפות צוחקות בזמן העבודה על הבצק">
-    </div>
-  </div>
-</section>
-
-<section class="section" id="love" aria-labelledby="love-title">
+<section class="section section-linen" id="love" aria-labelledby="love-title">
   <div class="wrap">
     <h2 class="h2" id="love-title">ההודעות שקיבלתי אחרי הסדנה</h2>
     <p class="intro">מתוך קבוצות הוואטסאפ של הסדנאות האחרונות, באותו הערב.</p>
@@ -521,7 +493,7 @@ p,li,dd{text-wrap:pretty}
       <article class="bubble" role="listitem"><div class="who"><span class="name">שושי</span><span class="when">סדנת 22/10</span></div><p>תודה על נתינה מהלב. היה אחה״צ מלמד, מהנה, טעים!! תודה שאפשרת לנו ללמוד.</p></article>
       <article class="bubble" role="listitem"><div class="who"><span class="name">נטלי</span><span class="when">סדנת 22/10</span></div><p>וואו דניאל, איך נהניתי מהכל! תודה רבה על הנתינה שלך, על שחלקת איתנו את הידע ואירחת אותנו בביתך המושלם 🧿</p></article>
     </div>
-    <p class="swipe-hint">החליקו לעוד הודעות</p>
+    <p class="swipe-hint">החליקי לעוד הודעות</p>
 
     <div class="table-strip">
       <img src="assets/img/table-1-700.webp" srcset="assets/img/table-1-420.webp 420w, assets/img/table-1-700.webp 700w, assets/img/table-1-1000.webp 1000w" sizes="(min-width: 1180px) 370px, 31vw" width="700" height="525" loading="lazy" decoding="async" alt="דניאל עם שתי משתתפות ליד קערות הבצק">
@@ -530,7 +502,7 @@ p,li,dd{text-wrap:pretty}
     </div>
 
     <div class="inline-cta">
-      <p>רוצים להצטרף לסדנה הקרובה?</p>
+      <p>רוצה להצטרף לסדנה הקרובה?</p>
       <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
         <svg aria-hidden="true"><use href="#i-wa"/></svg>לתאריכים ולהרשמה בוואטסאפ
       </a>
@@ -538,53 +510,72 @@ p,li,dd{text-wrap:pretty}
   </div>
 </section>
 
+<section class="section" id="for-you" aria-labelledby="foryou-title">
+  <div class="wrap together">
+    <h2 class="h2" id="foryou-title">ידיים בבצק, ריח של&nbsp;לחם ושולחן מלא</h2>
+    <p class="together-lede">ארבע שעות בבית שלי באבן יהודה: תלמדי, תנסי בידיים, תטעמי ותשאלי כל מה שתמיד רצית לדעת על מחמצת. באמצע נעצור לבראנץ׳ של לחמי מחמצת, יין ומטעמים, ובסוף תצאי עם כיכר משלך.</p>
+    <div class="together-photos">
+      <picture class="tp-main"><source media="(min-width: 980px)" srcset="assets/img/hero-560.webp 560w, assets/img/hero-840.webp 840w, assets/img/hero-1200.webp 1200w" sizes="460px"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="840" height="1050" loading="lazy" decoding="async" alt="דניאל ומשתתפת בסדנה עובדות עם בצק ליד השיש, וצוחקות"></picture>
+      <img class="tp-second" src="assets/img/for-you-900.webp" srcset="assets/img/for-you-600.webp 600w, assets/img/for-you-900.webp 900w, assets/img/for-you-1300.webp 1300w" sizes="(min-width: 980px) 460px, calc(100vw - 40px)" width="900" height="600" loading="lazy" decoding="async" alt="שתי משתתפות צוחקות בזמן העבודה על הבצק">
+    </div>
+    <h3 class="pains-title">הסדנה הזאת בשבילך, אם</h3>
+    <ul class="pains">
+      <li>את רוצה לדעת בדיוק מה יש בלחם שאת אוכלת.</li>
+      <li>חלמת להכין בבית לחם מחמצת, אבל לא ידעת מאיפה להתחיל.</li>
+      <li>ניסית לבד, הבצק לא תפח או שהלחם יצא שטוח, ולא הבנת למה.</li>
+      <li>בא לך כמה שעות לעצמך, עם הידיים בבצק ובחברה טובה.</li>
+    </ul>
+    <p class="promise"><strong>בסוף הסדנה תדעי להכין לחם מחמצת בעצמך,</strong> ותדעי בדיוק מה נכנס לתוכו: קמח, מים ומלח. בלי חומרים משמרים, בלי שמרים תעשייתיים, ובלי לנחש.</p>
+  </div>
+</section>
+
 <section class="section section-linen" id="journey" aria-labelledby="journey-title">
   <div class="wrap">
-    <h2 class="h2" id="journey-title">מה מחכה לכם ב-4&nbsp;שעות של סדנת מחמצת?</h2>
+    <h2 class="h2" id="journey-title">מה מחכה לך ב-4&nbsp;שעות של סדנת מחמצת?</h2>
     <p class="intro">מעשית ותיאורטית, צעד אחר צעד, מהמחמצת ועד הכיכר.</p>
 
     <div class="journey-grid">
       <ol class="steps">
         <li class="step is-active">
           <span class="step-num" aria-hidden="true">1</span>
-          <h3>מתחילים מהבסיס: היכרות עם המחמצת</h3>
+          <h3>מתחילות מהבסיס: היכרות עם המחמצת</h3>
           <p>מהי מחמצת, איך היא עובדת, איך מתחזקים אותה ואיך יודעים מתי היא מוכנה לאפייה.</p>
           <div class="step-photo"><picture><source media="(max-width: 979px)" srcset="assets/img/step-1-480.webp 480w, assets/img/step-1-800.webp 800w, assets/img/step-1-1100.webp 1100w" sizes="calc(100vw - 104px)"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="600" loading="lazy" decoding="async" alt="משתתפת מריחה צנצנת מחמצת שדניאל מחזיקה"></picture></div>
         </li>
         <li class="step">
           <span class="step-num" aria-hidden="true">2</span>
-          <h3>מפשילים שרוולים: הכנת הבצק</h3>
+          <h3>מפשילות שרוולים: הכנת הבצק</h3>
           <p>היכרות עם חומרי הגלם, הכנת בצק מחמצת והבנת התהליך שמאחורי הלחם.</p>
           <div class="step-photo"><picture><source media="(max-width: 979px)" srcset="assets/img/step-2-480.webp 480w, assets/img/step-2-800.webp 800w, assets/img/step-2-1100.webp 1100w" sizes="calc(100vw - 104px)"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="600" loading="lazy" decoding="async" alt="ידיים עובדות בצק מחמצת בקערת נירוסטה"></picture></div>
         </li>
         <li class="step">
           <span class="step-num" aria-hidden="true">3</span>
           <h3>קיפולים והתפתחות הבצק</h3>
-          <p>לומדים איך ומתי מקפלים, מה קורה לבצק לאורך הזמן ואיך מזהים שהוא מתקדם כמו שצריך.</p>
+          <p>תלמדי איך ומתי מקפלים, מה קורה לבצק לאורך הזמן ואיך מזהים שהוא מתקדם כמו שצריך.</p>
           <div class="step-photo"><picture><source media="(max-width: 979px)" srcset="assets/img/step-3-480.webp 480w, assets/img/step-3-800.webp 800w, assets/img/step-3-1100.webp 1100w" sizes="calc(100vw - 104px)"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="600" loading="lazy" decoding="async" alt="מותחים ומקפלים בצק מחמצת בקופסה"></picture></div>
         </li>
         <li class="step">
           <span class="step-num" aria-hidden="true">4</span>
           <h3>הפסקה טעימה</h3>
-          <p>נהנים מבראנץ׳ מפנק, לחמי מחמצת, יין ומטעמים, לצד למידה ושיחה.</p>
+          <p>נהנות מבראנץ׳ מפנק, לחמי מחמצת, יין ומטעמים, לצד למידה ושיחה.</p>
           <div class="step-photo"><picture><source media="(max-width: 979px)" srcset="assets/img/step-4-480.webp 480w, assets/img/step-4-800.webp 800w, assets/img/step-4-1100.webp 1100w" sizes="calc(100vw - 104px)"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="600" loading="lazy" decoding="async" alt="פרוסות לחם מחמצת על קרש, זיתים ויין על שולחן הבראנץ׳"></picture></div>
         </li>
         <li class="step">
           <span class="step-num" aria-hidden="true">5</span>
           <h3>עיצוב והתפחה</h3>
-          <p>לומדים איך לעצב כיכר, איך להתפיח נכון ומה חשוב לדעת לפני האפייה.</p>
+          <p>תלמדי איך לעצב כיכר, איך להתפיח נכון ומה חשוב לדעת לפני האפייה.</p>
           <div class="step-photo"><picture><source media="(max-width: 979px)" srcset="assets/img/step-5-480.webp 480w, assets/img/step-5-800.webp 800w, assets/img/step-5-1100.webp 1100w" sizes="calc(100vw - 104px)"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="600" loading="lazy" decoding="async" alt="דניאל מראה למשתתפות איך לעצב כיכר"></picture></div>
         </li>
         <li class="step">
           <span class="step-num" aria-hidden="true">6</span>
           <h3>הדרך ללחם המושלם</h3>
-          <p>מדברים על שיטות אפייה בבית, טמפרטורות, זמני אפייה ואחסון.</p>
+          <p>נדבר על שיטות אפייה בבית, טמפרטורות, זמני אפייה ואחסון.</p>
           <div class="step-photo"><picture><source media="(max-width: 979px)" srcset="assets/img/step-6-480.webp 480w, assets/img/step-6-800.webp 800w, assets/img/step-6-1100.webp 1100w" sizes="calc(100vw - 104px)"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="600" loading="lazy" decoding="async" alt="כיכר נכנסת לתנור"></picture></div>
         </li>
         <li class="step">
           <span class="step-num" aria-hidden="true">7</span>
-          <h3>יוצאים לדרך!</h3>
-          <p>כל אחד ואחת יוצאים עם כיכר לחם שהכינו בעצמם לאפייה בבית, עם גור מחמצת להמשך הדרך ועם חוברת הדרכה שתלווה אתכם גם במטבח.</p>
+          <h3>יוצאות לדרך!</h3>
+          <p>תצאי עם כיכר לחם שהכנת בעצמך לאפייה בבית, עם גור מחמצת להמשך הדרך ועם חוברת הדרכה שתלווה אותך גם במטבח.</p>
           <div class="step-photo"><picture><source media="(max-width: 979px)" srcset="assets/img/step-7-480.webp 480w, assets/img/step-7-800.webp 800w, assets/img/step-7-1100.webp 1100w" sizes="calc(100vw - 104px)"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="600" loading="lazy" decoding="async" alt="כיכר לחם מחמצת אפויה בידיים"></picture></div>
         </li>
       </ol>
@@ -603,7 +594,7 @@ p,li,dd{text-wrap:pretty}
     <div class="after">
       <div>
         <h3>וגם אחרי שהסדנה נגמרת</h3>
-        <p>הליווי לא נגמר כשיוצאים מהדלת. בקבוצת הוואטסאפ של הסדנה ממשיכים לשאול, משתפים תמונות של הלחמים הראשונים ולומדים זה מזה.</p>
+        <p>הליווי לא נגמר כשיוצאות מהדלת. בקבוצת הוואטסאפ של הסדנה ממשיכות לשאול, משתפות תמונות של הלחמים הראשונים ולומדות אחת מהשנייה.</p>
       </div>
       <div class="chat" aria-label="שאלה ותשובה מקבוצת הוואטסאפ של הסדנה">
         <p class="msg in"><small>חן, בערב של הסדנה</small>עכשיו רק מגיעה הביתה... הבצק פה ממש תפח. להכניס אותו למקרר ואז להעביר לתבנית?</p>
@@ -658,7 +649,7 @@ p,li,dd{text-wrap:pretty}
 
     <div class="glossary">
       <h3 class="h2">מילון קטן למחמצת</h3>
-      <p class="intro">המילים שיתחילו להיות לכם מוכרות מאוד.</p>
+      <p class="intro">המילים שיתחילו להיות לך מוכרות מאוד.</p>
       <dl>
         <div><dt>מחמצת</dt><dd>תרבית חיה של קמח ומים, שבה חיים יחד שמרי בר וחיידקי חומצת חלב. היא מתפיחה את הלחם ונותנת לו את הטעם.</dd></div>
         <div><dt>האכלה 1:1:1</dt><dd>היחס בין מחמצת, קמח ומים בכל האכלה. משנים אותו כדי לשלוט בקצב ההתססה ובחמיצות.</dd></div>
@@ -683,18 +674,18 @@ p,li,dd{text-wrap:pretty}
       <h2 class="h2" id="daniel-title">כמה שעות של אהבה עם בצק</h2>
       <div class="body">
         <p>כשאני מכינה לחם, אני נכנסת לעולם משלי. הידיים עסוקות, הראש מתפנה, והמחשבות על כל מה שמחכה לי בהמשך היום פשוט נדחקות הצידה.</p>
-        <p>יש משהו כמעט מדיטטיבי בהכנת לחם מחמצת: לגעת בבצק, להרגיש את המרקם משתנה, לקפל, להמתין, להתבונן בתפיחה. אין באמת אפשרות למהר. צריך להיות נוכחים, להקשיב לתהליך ולתת לדברים לקרות בקצב שלהם.</p>
-        <p>בשבילי, הכנת לחם היא הרבה מעבר להכנת מזון. היא זמן לעצמי, חיבור לידיים, לחומר ולטבע, וסוג של שקט שקשה למצוא במקומות אחרים. ואת התחושה הזאת אני רוצה להעביר גם לכם.</p>
+        <p>יש משהו כמעט מדיטטיבי בהכנת לחם מחמצת: לגעת בבצק, להרגיש את המרקם משתנה, לקפל, להמתין, להתבונן בתפיחה. אין באמת אפשרות למהר. צריך להיות נוכחת, להקשיב לתהליך ולתת לדברים לקרות בקצב שלהם.</p>
+        <p>בשבילי, הכנת לחם היא הרבה מעבר להכנת מזון. היא זמן לעצמי, חיבור לידיים, לחומר ולטבע, וסוג של שקט שקשה למצוא במקומות אחרים. ואת התחושה הזאת אני רוצה להעביר גם לך.</p>
       </div>
-      <p class="closing">כי בסופו של דבר, יוצאים מהסדנה לא רק עם כיכר לחם וידע חדש, אלא גם עם חוויה של יצירה, נוכחות והנאה מהדרך.</p>
+      <p class="closing">כי בסופו של דבר, יוצאות מהסדנה לא רק עם כיכר לחם וידע חדש, אלא גם עם חוויה של יצירה, נוכחות והנאה מהדרך.</p>
       <p class="sign">דניאל</p>
 
       <div class="special">
         <h3>מה מיוחד בסדנה</h3>
         <ul>
-          <li><b>אוכל אמיתי</b>חוזרים להכין מזון מחומרי גלם פשוטים.</li>
-          <li><b>הבנה, לא רק מתכון</b>לומדים מה קורה בבצק, ולא רק מבצעים הוראות.</li>
-          <li><b>עצמאות</b>יוצאים עם הכלים להמשיך לאפות לבד, בבית.</li>
+          <li><b>אוכל אמיתי</b>חוזרות להכין מזון מחומרי גלם פשוטים.</li>
+          <li><b>הבנה, לא רק מתכון</b>לומדות מה קורה בבצק, ולא רק מבצעות הוראות.</li>
+          <li><b>עצמאות</b>יוצאות עם הכלים להמשיך לאפות לבד, בבית.</li>
           <li><b>חוויה אישית</b>סדנה אינטימית ומעשית סביב שולחן, עם אוכל טוב ואווירה נעימה.</li>
         </ul>
       </div>
@@ -708,19 +699,19 @@ p,li,dd{text-wrap:pretty}
     <div class="faq-list">
       <details>
         <summary>צריך ניסיון קודם באפייה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>ממש לא. מתחילים מהבסיס, ממה זו בכלל מחמצת ואיך עובדים איתה. הסדנה מתאימה גם למי שמעולם לא אפו לחם, וגם למי שכבר ניסו לבד ונתקעו.</p>
+        <p>ממש לא. מתחילות מהבסיס, ממה זו בכלל מחמצת ואיך עובדים איתה. הסדנה מתאימה גם אם מעולם לא אפית לחם, וגם אם כבר ניסית לבד ונתקעת.</p>
       </details>
       <details>
-        <summary>מה לוקחים הביתה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>כיכר לחם שהכנתם בעצמכם, מוכנה לאפייה בתנור הביתי, גור מחמצת להמשך הדרך וחוברת הדרכה מפורטת שעושה סדר בכל השלבים.</p>
+        <summary>מה אני לוקחת הביתה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>כיכר לחם שהכנת בעצמך, מוכנה לאפייה בתנור הביתי, גור מחמצת להמשך הדרך וחוברת הדרכה מפורטת שעושה סדר בכל השלבים.</p>
       </details>
       <details>
         <summary>מה קורה אחרי הסדנה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>ממשיכים יחד. בקבוצת הוואטסאפ של הסדנה אני זמינה לשאלות ולתמיכה, ומשתפים בה תמונות של הלחמים והמחמצות, כדי שכולם ילמדו מכולם.</p>
+        <p>ממשיכות יחד. בקבוצת הוואטסאפ של הסדנה אני זמינה לשאלות ולתמיכה, ומשתפות בה תמונות של הלחמים והמחמצות, כדי שכולן ילמדו מכולן.</p>
       </details>
       <details>
-        <summary>הסדנה מתאימה רק לנשים?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>בכלל לא. הסדנה פתוחה לכל מי שרוצה ללמוד להכין לחם מחמצת. הרבה מגיעים בזוגות: עם חברה, עם אחות, לחגוג משהו או סתם את החיים.</p>
+        <summary>אפשר להגיע עם חברה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>בטח! הרבה מגיעות בזוגות: עם חברה, עם אחות, לחגוג משהו או סתם את החיים. והסדנה פתוחה גם לגברים.</p>
       </details>
       <details>
         <summary>יש אוכל בסדנה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -728,7 +719,7 @@ p,li,dd{text-wrap:pretty}
       </details>
       <details>
         <summary>איפה זה, מתי וכמה זה עולה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>הסדנאות מתקיימות בבית שלי באבן יהודה. לתאריכים הקרובים ולמחיר, שלחו לי הודעה בוואטסאפ ואחזור אליכם עם כל הפרטים.</p>
+        <p>הסדנאות מתקיימות בבית שלי באבן יהודה. לתאריכים הקרובים ולמחיר, שלחי לי הודעה בוואטסאפ ואחזור אלייך עם כל הפרטים.</p>
       </details>
     </div>
   </div>
@@ -740,8 +731,8 @@ p,li,dd{text-wrap:pretty}
     <img src="assets/img/cta-tall-900.webp" srcset="assets/img/cta-tall-600.webp 600w, assets/img/cta-tall-900.webp 900w" sizes="100vw" width="900" height="1125" loading="lazy" decoding="async" alt="">
   </picture>
   <div class="wrap">
-    <h2 id="final-title">הכיכר הראשונה שלכם מחכה</h2>
-    <p>שלחו לי הודעה, ואחזור אליכם עם התאריכים הקרובים. נתראה סביב השולחן.</p>
+    <h2 id="final-title">הכיכר הראשונה שלך מחכה</h2>
+    <p>שלחי לי הודעה, ואחזור אלייך עם התאריכים הקרובים. נתראה סביב השולחן.</p>
     <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%AA%D7%90%D7%A8%D7%99%D7%9B%D7%99%D7%9D%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%99%D7%9D%20%D7%95%D7%9C%D7%A9%D7%A8%D7%99%D7%99%D7%9F%20%D7%9E%D7%A7%D7%95%D7%9D%20%D7%91%D7%A1%D7%93%D7%A0%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
       <svg aria-hidden="true"><use href="#i-wa"/></svg>שליחת הודעה בוואטסאפ
     </a>
