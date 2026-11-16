@@ -82,11 +82,6 @@ p,li,dd{text-wrap:pretty}
 .btn svg{width:22px;height:22px;flex:none}
 .btn-sm{min-height:42px;padding:0 18px;font-size:.95rem;box-shadow:none}
 .btn-sm svg{width:19px;height:19px}
-.text-link{
-  font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:7px;
-  text-decoration-thickness:1.5px;text-decoration-color:rgba(124,69,32,.45);
-}
-.text-link:hover{text-decoration-color:var(--crust)}
 
 /* header */
 .site-header{
@@ -96,7 +91,8 @@ p,li,dd{text-wrap:pretty}
   border-bottom:1px solid transparent;transition:border-color .25s ease;
 }
 .site-header.is-scrolled{border-bottom-color:var(--rule)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:68px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:60px}
+@media (min-width:980px){.header-inner{height:68px}}
 .brand{display:flex;flex-direction:column;text-decoration:none;line-height:1.1}
 .brand-name{font-family:var(--serif);font-size:1.85rem}
 .brand-sub{font-size:.8rem;color:var(--ink-2)}
@@ -110,30 +106,51 @@ p,li,dd{text-wrap:pretty}
   .header-cta .short{display:none}
 }
 
-/* hero: copy, the workshop film in an oven-arch frame, the four facts */
-.hero{padding-block:26px 56px}
-.hero-grid{display:grid;gap:34px}
-.hero-text{display:contents}
-.hero-copy{order:1}
-.hero-media{order:2}
-.hero-facts{order:3}
-.kicker{font-size:1rem;font-weight:700;color:var(--crust);margin-bottom:14px}
+/* hero: copy, the workshop film in an oven-arch frame, the four facts.
+   Phones: kicker, headline, text, both buttons and the film share the first screen. .hero-first fills the
+   screen under the header (61px header + 12px top padding + 11px air = 84px), and the film takes the height
+   that is left (.hero-media flexes, .hero-frame is that height at 9:16, minus the crumb's 5% overhang). */
+.hero{padding-block:12px 56px}
+.hero-first{display:flex;flex-direction:column;min-height:calc(100vh - 84px);min-height:calc(100svh - 84px)}
+.kicker{font-size:1rem;font-weight:700;line-height:1.35;color:var(--crust);margin-bottom:8px}
 .hero h1{font-size:clamp(2.75rem,1.4rem + 5.6vw,5.3rem);line-height:1.02}
-.lede{margin-top:20px;font-size:1.15rem;line-height:1.65;color:var(--ink-2);max-width:31em}
-.hero-actions{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
-.hero-media{position:relative;width:min(78vw,360px);margin-inline:auto}
+.lede{margin-top:12px;font-size:1.0625rem;line-height:1.6;color:var(--ink-2);max-width:31em}
+.hero-actions{margin-top:20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.hero-actions .btn{min-height:50px;padding:0 16px;gap:8px;font-size:1rem}
+.hero-actions .btn svg{width:20px;height:20px}
+.hero-actions .btn-main{flex:1 1 auto}
+.hero-actions .opt{display:none}
+.btn-soft{background:rgba(124,69,32,.1);color:var(--crust-deep);box-shadow:none}
+.btn-soft:hover{background:rgba(124,69,32,.17)}
+/* phones: a 3:4 arch (the 9:16 film is cropped top and bottom; every shot keeps its subject), so the film
+   reads larger in the height that is left; capped so the arch never runs wider than ~85% of the column */
+.hero-media{position:relative;flex:1 1 0;min-height:230px;max-height:min(640px,calc((100vw - 40px) * 1.19));margin-top:20px}
+/* narrow phones (360-380px): both buttons still share one row, the text keeps to four or five lines */
+@media (max-width:380px){
+  .lede{font-size:1rem}
+  .hero-actions{gap:8px}
+  .hero-actions .btn{padding:0 12px;gap:6px;font-size:.95rem}
+}
+/* short phone screens: a little less air between the hero lines, so the film keeps its height */
+@media (max-width:979px) and (max-height:700px){
+  .kicker{margin-bottom:6px}
+  .lede{margin-top:10px}
+  .hero-actions{margin-top:16px}
+  .hero-media{margin-top:16px}
+}
+.hero-frame{position:absolute;top:0;left:50%;height:95.2%;aspect-ratio:3/4;transform:translateX(-50%)}
 .film{
-  position:relative;aspect-ratio:9/16;overflow:hidden;background:#2A1F17;
-  border-radius:50% 50% 6% 6% / 28.125% 28.125% 3.4% 3.4%;
+  position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#2A1F17;
+  border-radius:50% 50% 6% 6% / 37.5% 37.5% 4.5% 4.5%;
   box-shadow:0 40px 70px -40px rgba(42,31,23,.7);
 }
 .film video{width:100%;height:100%;object-fit:cover}
 .film-toggle{
-  position:absolute;inset-inline-start:16px;bottom:16px;width:46px;height:46px;border-radius:50%;
+  position:absolute;inset-inline-start:10px;bottom:10px;width:38px;height:38px;border-radius:50%;
   border:0;cursor:pointer;display:grid;place-items:center;color:#FBF6EE;
   background:rgba(32,23,17,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
 }
-.film-toggle svg{width:20px;height:20px}
+.film-toggle svg{width:17px;height:17px}
 .film-toggle .i-play{display:none}
 .film-toggle[data-state="paused"] .i-play{display:block}
 .film-toggle[data-state="paused"] .i-pause{display:none}
@@ -143,7 +160,7 @@ p,li,dd{text-wrap:pretty}
   box-shadow:0 22px 40px -22px rgba(42,31,23,.6);
 }
 .hero-crumb img{width:100%;height:100%;object-fit:cover}
-.hero-facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
+.hero-facts{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
 .hero-facts li{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:18px 4px 18px 12px;border-bottom:1px solid var(--rule)}
 .hero-facts li:nth-child(odd){border-inline-end:1px solid var(--rule)}
 .hero-facts li:nth-child(even){padding-inline-start:14px}
@@ -152,10 +169,24 @@ p,li,dd{text-wrap:pretty}
 .hero-facts span{display:block;font-size:.92rem;line-height:1.45;color:var(--ink-2);margin-top:2px}
 @media (min-width:980px){
   .hero{padding-block:36px 80px}
-  .hero-grid{grid-template-columns:minmax(0,1fr) 380px;column-gap:88px;align-items:center}
-  .hero-text{display:block}
-  .hero-media{width:380px}
-  .hero-facts{margin-top:44px}
+  /* copy over facts on the start side, the film centred beside both; the film shrinks on short laptop screens */
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"copy media" "facts media";column-gap:88px}
+  .hero-first{display:contents}
+  .hero-copy{grid-area:copy;align-self:end}
+  .hero-media{grid-area:media;align-self:center;flex:none;min-height:0;max-height:none;margin:0;
+    width:clamp(300px,calc((100vh - 150px) * .5625),380px);width:clamp(300px,calc((100svh - 150px) * .5625),380px)}
+  .hero-frame{position:relative;top:auto;left:auto;width:100%;height:auto;aspect-ratio:auto;transform:none}
+  .film{aspect-ratio:9/16;border-radius:50% 50% 6% 6% / 28.125% 28.125% 3.4% 3.4%}
+  .hero-facts{grid-area:facts;align-self:start;margin-top:44px}
+  .kicker{margin-bottom:14px}
+  .lede{margin-top:20px;font-size:1.15rem;line-height:1.65}
+  .hero-actions{margin-top:28px;gap:14px}
+  .hero-actions .btn{min-height:54px;padding:0 28px;gap:10px;font-size:1.0625rem}
+  .hero-actions .btn svg{width:22px;height:22px}
+  .hero-actions .btn-main{flex:none}
+  .hero-actions .opt{display:inline}
+  .film-toggle{inset-inline-start:16px;bottom:16px;width:46px;height:46px}
+  .film-toggle svg{width:20px;height:20px}
   .hero-facts li{flex-direction:row;gap:12px;padding:16px 0 16px 16px}
   .hero-facts li:nth-child(even){padding-inline-start:18px}
   .hero-facts svg{margin-top:3px}
@@ -422,39 +453,41 @@ p,li,dd{text-wrap:pretty}
 
 <section class="hero" id="top">
   <div class="wrap hero-grid">
-    <div class="hero-text">
+    <div class="hero-first">
       <div class="hero-copy">
         <p class="kicker">סדנת לחמי מחמצת באבן יהודה</p>
         <h1>לחם מחמצת אמיתי.<br>מהידיים שלך.</h1>
         <p class="lede">בסדנה שלי תלמדי להכין לחם מחמצת אמיתי, מהיכרות עם המחמצת ועד כיכר לחם שתכיני במו ידייך. תקבלי ידע, כלים וביטחון להמשיך לאפות בעצמך, וליהנות מלחם ביתי, טרי וטעים גם הרבה אחרי שהסדנה מסתיימת.</p>
         <div class="hero-actions">
-          <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
-            <svg aria-hidden="true"><use href="#i-wa"/></svg>לתאריכים ולהרשמה בוואטסאפ
+          <a class="btn btn-main" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg><span>לתאריכים ולהרשמה<span class="opt"> בוואטסאפ</span></span>
           </a>
-          <a class="text-link" href="#journey">מה עושים בסדנה</a>
+          <a class="btn btn-soft" href="#journey">מה עושים בסדנה</a>
         </div>
       </div>
-      <ul class="hero-facts" aria-label="הסדנה בקצרה">
-        <li><svg aria-hidden="true"><use href="#i-clock"/></svg><div><strong>4 שעות</strong><span>מעשית ותיאורטית</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><strong>אבן יהודה</strong><span>סדנה אינטימית סביב שולחן אחד</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-loaf"/></svg><div><strong>יוצאת עם כיכר</strong><span>גור מחמצת וחוברת הדרכה</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-chat"/></svg><div><strong>ליווי גם אחרי</strong><span>קבוצת וואטסאפ לשאלות</span></div></li>
-      </ul>
-    </div>
-    <div class="hero-media">
-      <div class="film arch-rise">
-        <video muted playsinline loop preload="none" poster="assets/img/workshop-poster.webp" aria-label="סרטון קצר מתוך סדנת לחמי המחמצת">
-          <source src="assets/video/workshop.mp4" type="video/mp4">
-        </video>
-        <button class="film-toggle" type="button" data-state="paused" aria-label="הפעלת הסרטון">
-          <svg class="i-play" aria-hidden="true"><use href="#i-play"/></svg>
-          <svg class="i-pause" aria-hidden="true"><use href="#i-pause"/></svg>
-        </button>
-      </div>
-      <div class="hero-crumb">
-        <img src="assets/img/hero-crumb-480.webp" srcset="assets/img/hero-crumb-280.webp 280w, assets/img/hero-crumb-480.webp 480w" sizes="(min-width: 980px) 152px, 28vw" width="480" height="480" alt="כיכר מחמצת חצויה עם קראמב אוורירי">
+      <div class="hero-media">
+        <div class="hero-frame">
+          <div class="film arch-rise">
+            <video muted playsinline loop preload="none" poster="assets/img/workshop-poster.webp" aria-label="סרטון קצר מתוך סדנת לחמי המחמצת">
+              <source src="assets/video/workshop.mp4" type="video/mp4">
+            </video>
+            <button class="film-toggle" type="button" data-state="paused" aria-label="הפעלת הסרטון">
+              <svg class="i-play" aria-hidden="true"><use href="#i-play"/></svg>
+              <svg class="i-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+            </button>
+          </div>
+          <div class="hero-crumb">
+            <img src="assets/img/hero-crumb-480.webp" srcset="assets/img/hero-crumb-280.webp 280w, assets/img/hero-crumb-480.webp 480w" sizes="(min-width: 980px) 152px, 28vw" width="480" height="480" alt="כיכר מחמצת חצויה עם קראמב אוורירי">
+          </div>
+        </div>
       </div>
     </div>
+    <ul class="hero-facts" aria-label="הסדנה בקצרה">
+      <li><svg aria-hidden="true"><use href="#i-clock"/></svg><div><strong>4 שעות</strong><span>מעשית ותיאורטית</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><strong>אבן יהודה</strong><span>סדנה אינטימית סביב שולחן אחד</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-loaf"/></svg><div><strong>יוצאת עם כיכר</strong><span>גור מחמצת וחוברת הדרכה</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-chat"/></svg><div><strong>ליווי גם אחרי</strong><span>קבוצת וואטסאפ לשאלות</span></div></li>
+    </ul>
   </div>
 </section>
 
