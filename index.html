@@ -33,7 +33,7 @@
   --crust-deep:#5F3317;
   --ink:#2A1F17;
   --ink-2:#5B4A3E;
-  --stone:#9A9086;
+  --stone:#70665D; /* muted small text: 4.6:1 on linen, 5.5:1 on paper (WCAG AA) */
   --rule:rgba(42,31,23,.14);
   --night-text:#E6DCCC;
   --night-soft:#CBBDA9;
@@ -417,6 +417,9 @@ p,li,dd{text-wrap:pretty}
 .footer-links{display:flex;flex-wrap:wrap;gap:8px 24px}
 .footer-links a{text-decoration:none;font-weight:600}
 .footer-links a:hover{color:var(--crust)}
+.footer-legal{display:flex;flex-wrap:wrap;gap:6px 22px}
+.footer-legal a{color:inherit;text-underline-offset:4px}
+.footer-legal a:hover{color:var(--crust)}
 @media (min-width:980px){.site-footer{padding-bottom:44px}}
 
 /* sticky mobile cta */
@@ -578,7 +581,7 @@ p,li,dd{text-wrap:pretty}
     </div>
 
     <p class="bubbles-label">ומקבוצות הוואטסאפ של הסדנאות, באותו הערב</p>
-    <div class="bubbles" role="list">
+    <div class="bubbles" role="list" tabindex="0" aria-label="הודעות מקבוצות הוואטסאפ של הסדנאות">
       <article class="bubble" role="listitem"><div class="who"><span class="name">תמי</span><span class="when">סדנת 22/10</span></div><p>דניאל יקירה, תודה ענקית על סדנה מושלמת מכל הבחינות. מאחלת לך המון בהצלחה, אני לגמרי הולכת להמליץ עלייך ❤️</p></article>
       <article class="bubble" role="listitem"><div class="who"><span class="name">אנה</span><span class="when">סדנת 29/10</span></div><p>אני מצטרפת לתודות. השפע והסבלנות שבהם לימדת, והיה ניכר שחשוב לך שנבין ונצליח! באמת מלכה ומהממת!!</p></article>
       <article class="bubble" role="listitem"><div class="who"><span class="name">אלישבע</span><span class="when">סדנת 22/10</span></div><p>דניאלי תודה רבה לך, למדתי כל כך הרבה. הכל היה מושלם וטעים וברור ומחכים. איזה כיף היה לפגוש את כולן ❤️❤️</p></article>
@@ -856,7 +859,7 @@ p,li,dd{text-wrap:pretty}
       <a href="tel:+972547575775">טלפון</a>
       <a href="https://www.instagram.com/chefdanielle_/" target="_blank" rel="noopener">אינסטגרם</a>
     </nav>
-    <div>© 2026 דניאל אביב</div>
+    <div class="footer-legal"><span>© 2026 דניאל אביב</span><a href="accessibility.html">הצהרת נגישות</a></div>
   </div>
 </footer>
 
