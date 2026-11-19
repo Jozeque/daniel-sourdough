@@ -208,6 +208,37 @@ p,li,dd{text-wrap:pretty}
 .arch img{width:100%;height:100%;object-fit:cover}
 
 /* testimonials */
+/* video strip at the top of the section: a swipe strip on phones (the next video peeks in), all four side by
+   side on desktop. A tap plays one with sound and Hebrew captions; one plays at a time, none plays on its own. */
+.vids{
+  list-style:none;margin:36px calc(var(--gutter) * -1) 0;padding:4px var(--gutter) 8px;
+  display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;
+}
+.vids::-webkit-scrollbar{display:none}
+.vids > li{flex:0 0 64%;scroll-snap-align:center}
+.vid{margin:0}
+.vid-frame{position:relative;aspect-ratio:9/16;overflow:hidden;border-radius:22px;background:#2A1F17;box-shadow:0 30px 50px -36px rgba(42,31,23,.75)}
+.vid-frame video{width:100%;height:100%;object-fit:cover}
+.vid-cover{position:absolute;inset:0;width:100%;padding:0;border:0;background:none;cursor:pointer}
+.vid-cover img{width:100%;height:100%;object-fit:cover}
+/* the play button sits low, so it never covers a face */
+.vid-icon{
+  position:absolute;left:50%;bottom:16px;width:58px;height:58px;margin-left:-29px;border-radius:50%;
+  display:grid;place-items:center;color:#FBF6EE;background:rgba(32,23,17,.5);box-shadow:0 8px 20px -8px rgba(0,0,0,.45);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background-color .2s ease,transform .2s ease;
+}
+.vid-icon svg{width:26px;height:26px;margin-left:4px} /* the triangle's eye centre sits right of its box centre */
+.vid-cover:hover .vid-icon{background:rgba(32,23,17,.68);transform:scale(1.06)}
+.vid-cover:focus-visible,.vid-frame video:focus-visible{outline-offset:-4px;border-radius:22px} /* the frame clips outside */
+.vid-frame.is-on .vid-cover{display:none}
+.vid figcaption{margin-top:10px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.vid cite{font-style:normal;font-weight:700;color:var(--crust)}
+.vid figcaption span{font-size:.88rem;color:var(--stone)}
+.vid video::cue{font:600 15px/1.4 var(--sans);color:#FBF6EE;background:rgba(32,23,17,.8)}
+@media (min-width:760px){.vids > li{flex-basis:29%}}
+@media (min-width:980px){
+  .vids{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;overflow:visible;margin-inline:0;padding-inline:0}
+}
 .featured{margin:40px 0 0;max-width:880px}
 .featured blockquote{margin:0}
 .pull{font-family:var(--serif);font-size:clamp(2.1rem,1.5rem + 2.4vw,3.4rem);line-height:1.2;color:var(--ink)}
@@ -511,7 +542,71 @@ p,li,dd{text-wrap:pretty}
 <section class="section section-linen" id="love" aria-labelledby="love-title">
   <div class="wrap">
     <h2 class="h2" id="love-title">ההודעות שקיבלתי אחרי הסדנה</h2>
-    <p class="intro">מה שכתבו לי משתתפות מהסדנאות האחרונות, במילים שלהן.</p>
+    <p class="intro">מה ששלחו לי משתתפות מהסדנאות האחרונות, במילים שלהן.</p>
+
+    <ul class="vids" aria-label="סרטונים ששלחו לי משתתפות אחרי הסדנה">
+      <li>
+        <figure class="vid">
+          <div class="vid-frame">
+            <video playsinline preload="none" aria-label="הילה מספרת על הסדנה">
+              <source src="assets/video/t1.mp4" type="video/mp4">
+              <track kind="captions" src="assets/video/t1.vtt" srclang="he" label="עברית" default>
+            </video>
+            <button class="vid-cover" type="button" aria-label="לצפייה בסרטון של הילה">
+              <img src="assets/img/t1-cover.webp" width="480" height="854" loading="lazy" decoding="async" alt="">
+              <span class="vid-icon"><svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            </button>
+          </div>
+          <figcaption><cite>הילה</cite><span>1:21</span></figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="vid">
+          <div class="vid-frame">
+            <video playsinline preload="none" aria-label="ענבל מראה את הלחם שאפתה">
+              <source src="assets/video/t2.mp4" type="video/mp4">
+              <track kind="captions" src="assets/video/t2.vtt" srclang="he" label="עברית" default>
+            </video>
+            <button class="vid-cover" type="button" aria-label="לצפייה בסרטון של ענבל">
+              <img src="assets/img/t2-cover.webp" width="480" height="854" loading="lazy" decoding="async" alt="">
+              <span class="vid-icon"><svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            </button>
+          </div>
+          <figcaption><cite>ענבל</cite><span>0:21</span></figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="vid">
+          <div class="vid-frame">
+            <video playsinline preload="none" aria-label="חן מספרת על הסדנה">
+              <source src="assets/video/t3.mp4" type="video/mp4">
+              <track kind="captions" src="assets/video/t3.vtt" srclang="he" label="עברית" default>
+            </video>
+            <button class="vid-cover" type="button" aria-label="לצפייה בסרטון של חן">
+              <img src="assets/img/t3-cover.webp" width="480" height="854" loading="lazy" decoding="async" alt="">
+              <span class="vid-icon"><svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            </button>
+          </div>
+          <figcaption><cite>חן</cite><span>0:48</span></figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="vid">
+          <div class="vid-frame">
+            <video playsinline preload="none" aria-label="ורד מספרת על הסדנה">
+              <source src="assets/video/t4.mp4" type="video/mp4">
+              <track kind="captions" src="assets/video/t4.vtt" srclang="he" label="עברית" default>
+            </video>
+            <button class="vid-cover" type="button" aria-label="לצפייה בסרטון של ורד">
+              <img src="assets/img/t4-cover.webp" width="480" height="854" loading="lazy" decoding="async" alt="">
+              <span class="vid-icon"><svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            </button>
+          </div>
+          <figcaption><cite>ורד</cite><span>1:23</span></figcaption>
+        </figure>
+      </li>
+    </ul>
+    <p class="swipe-hint">החליקי לעוד סרטונים</p>
 
     <figure class="featured">
       <blockquote>
@@ -903,6 +998,43 @@ p,li,dd{text-wrap:pretty}
       }, { threshold: 0.35 }).observe(video);
     }
     sync();
+  }
+
+  // video testimonials: a tap on the cover plays that video with sound, captions and the browser's own controls;
+  // starting one stops the others, and one that leaves the screen (a scroll or a swipe) stops too
+  var vidFrames = [].slice.call(d.querySelectorAll('.vid-frame'));
+  var vidEls = vidFrames.map(function (f) { return f.querySelector('video'); });
+  vidFrames.forEach(function (frame, i) {
+    var v = vidEls[i];
+    var cover = frame.querySelector('.vid-cover');
+    var img = cover.querySelector('img');
+    cover.addEventListener('click', function () {
+      if (!v.poster) v.poster = img.currentSrc || img.src; // no black flash before the first frame
+      frame.classList.add('is-on');
+      v.controls = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+      v.focus({ preventScroll: true });
+    });
+    v.addEventListener('play', function () {
+      vidEls.forEach(function (o) { if (o !== v && !o.paused) o.pause(); });
+    });
+    v.addEventListener('ended', function () {
+      frame.classList.remove('is-on');
+      v.controls = false;
+      v.currentTime = 0;
+      cover.focus({ preventScroll: true });
+    });
+  });
+  if (vidEls.length && hasIO) {
+    var vidIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        var full = d.fullscreenElement || d.webkitFullscreenElement || v.webkitDisplayingFullscreen;
+        if (e.intersectionRatio < 0.3 && !v.paused && !full) v.pause();
+      });
+    }, { threshold: [0, 0.3] });
+    vidEls.forEach(function (v) { vidIO.observe(v); });
   }
 
   var steps = [].slice.call(d.querySelectorAll('.step'));
