@@ -85,6 +85,14 @@ h2{font-size:clamp(1.95rem,1.7rem + .8vw,2.35rem)}
   .date.is-full .d-left{grid-column:1}
 }
 .state{margin-top:14px;color:var(--ink-2)}
+/* placeholder rows while the dates load for the first time */
+.date.is-ghost{cursor:default;grid-template-columns:1fr}
+.date.is-ghost:hover{background:none}
+.ghost{display:block;height:1.05rem;border-radius:6px;background:linear-gradient(90deg,var(--linen) 25%,#F7F2EA 50%,var(--linen) 75%);background-size:200% 100%;animation:ghost 1.4s ease-in-out infinite}
+.ghost.g1{width:58%;height:1.55rem}
+.ghost.g2{width:36%;margin-top:9px}
+@keyframes ghost{from{background-position:100% 0}to{background-position:-100% 0}}
+@media (prefers-reduced-motion:reduce){.ghost{animation:none}}
 
 /* the form */
 .form{margin-top:34px;display:grid;gap:20px}
@@ -267,14 +275,42 @@ h2{font-size:clamp(1.95rem,1.7rem + .8vw,2.35rem)}
 
   /* ---------- the list ---------- */
 
-  function load(keep) {
+  // The dates this browser fetched in the last few minutes (here or on the homepage) show at once; the fresh list
+  // follows quietly. Seats are checked again when she holds one, so a list a moment old can't oversell.
+  var WS_KEY = 'dav-ws', WS_FRESH = 10 * 60000;
+  function cachedWs() {
+    try {
+      var c = JSON.parse(localStorage.getItem(WS_KEY) || 'null');
+      return c && c.w && Date.now() - c.t < WS_FRESH ? c.w : null;
+    } catch (e) { return null; }
+  }
+  function keepWs(w) { try { localStorage.setItem(WS_KEY, JSON.stringify({ t: Date.now(), w: w })); } catch (e) {} }
+
+  function ghosts() {
+    list.innerHTML = '';
+    for (var k = 0; k < 2; k++) {
+      var row = el('div', 'date is-ghost');
+      row.setAttribute('aria-hidden', 'true');
+      row.appendChild(el('span', 'ghost g1'));
+      row.appendChild(el('span', 'ghost g2'));
+      list.appendChild(row);
+    }
     stateLine.hidden = false;
     stateLine.textContent = 'המועדים נטענים.';
+  }
+
+  function load(keep, fresh) {
+    var shown = fresh ? null : cachedWs();
+    if (shown) { data = shown; render(keep); } else ghosts();
     return api('GET', { action: 'workshops' }, null, 20000).then(function (r) {
       if (!r || !r.ok) throw new Error('bad');
-      data = r.workshops || [];
-      render(keep);
+      var ws = r.workshops || [];
+      keepWs(ws);
+      if (shown && JSON.stringify(ws) === JSON.stringify(shown)) return;   // nothing changed: leave the page as it is
+      data = ws;
+      render(shown ? true : keep);   // a date she already picked stays picked
     }).catch(function () {
+      if (shown) return;   // she already sees the dates, and the hold checks the seats
       list.innerHTML = '';
       details.hidden = true;
       stateLine.textContent = 'לא הצלחנו לטעון את המועדים כרגע. אפשר לרענן את הדף, או להירשם בווטסאפ.';
@@ -459,7 +495,7 @@ h2{font-size:clamp(1.95rem,1.7rem + .8vw,2.35rem)}
       say(r.error === 'closed' ? 'ההרשמה למועד הזה נסגרה. אפשר לבחור מועד אחר.'
         : r.error === 'full' ? 'בדיוק עכשיו נתפסו המקומות האחרונים במועד הזה. אפשר לבחור מועד אחר.'
         : 'בדיוק עכשיו נתפסו מקומות. ' + (r.left === 1 ? 'נשאר מקום אחד.' : 'נשארו ' + r.left + ' מקומות.'), true);
-      load(r.error === 'seats');
+      load(r.error === 'seats', true);
       notice.scrollIntoView({ block: 'center' });
       return;
     }
@@ -546,7 +582,7 @@ h2{font-size:clamp(1.95rem,1.7rem + .8vw,2.35rem)}
       history.replaceState(null, '', location.pathname);
       if (id) {
         // Free the seats first, so the list right after shows them free.
-        api('POST', null, { action: 'release', booking: id }, 15000).then(function () { load(false); }, function () { load(false); });
+        api('POST', null, { action: 'release', booking: id }, 15000).then(function () { load(false, true); }, function () { load(false, true); });
         return;
       }
     }

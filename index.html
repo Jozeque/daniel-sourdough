@@ -1041,6 +1041,23 @@ p,li,dd{text-wrap:pretty}
     steps.forEach(function (s) { stepIO.observe(s); });
   }
 
+  // The booking page's dates, fetched quietly while she reads this page: "הרשמה לסדנה" then opens with them ready
+  // (booking/ shows this list at once and refreshes it). It also wakes Daniel's booking system up.
+  var WS_API = 'https://script.google.com/macros/s/AKfycbxx9UusizOtr7fnZuETGN9jIlgYeYVnXNwxEZ8DSHD_J2rXq_VfyyxZnMUMHWrbVhgltA/exec?action=workshops';
+  var wsAsked = false;
+  var fetchDates = function () {
+    if (wsAsked || !window.fetch) return;
+    wsAsked = true;
+    try {
+      var c = JSON.parse(localStorage.getItem('dav-ws') || 'null');
+      if (c && Date.now() - c.t < 60000) return;   // fetched a minute ago: fresh enough
+    } catch (e) {}
+    fetch(WS_API).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r || !r.ok) return;
+      try { localStorage.setItem('dav-ws', JSON.stringify({ t: Date.now(), w: r.workshops || [] })); } catch (e) {}
+    }).catch(function () {});
+  };
+  setTimeout(fetchDates, 300);
 })();
 </script>
 </body>
