@@ -452,16 +452,17 @@ p,li,dd{text-wrap:pretty}
 .footer-legal a:hover{color:var(--crust)}
 @media (min-width:980px){.site-footer{padding-bottom:44px}}
 
-/* sticky mobile cta */
-.sticky-cta{
-  position:fixed;inset-inline:0;bottom:0;z-index:60;
-  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-  background:rgba(247,244,239,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
-  border-top:1px solid var(--rule);transform:translateY(110%);transition:transform .3s ease;
+/* floating WhatsApp button, always on screen */
+.wa-float{
+  position:fixed;z-index:60;inset-inline-end:16px;bottom:calc(16px + env(safe-area-inset-bottom));
+  width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+  background:#25D366;color:#fff;box-shadow:0 6px 18px rgba(42,31,23,.25);
+  transition:transform .2s ease,box-shadow .2s ease;
 }
-.sticky-cta.is-shown{transform:none}
-.sticky-cta .btn{width:100%}
-@media (min-width:980px){.sticky-cta{display:none}}
+.wa-float svg{width:30px;height:30px}
+.wa-float:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(42,31,23,.3)}
+.wa-float:focus-visible{outline:3px solid var(--crust);outline-offset:3px}
+@media (min-width:980px){.wa-float{inset-inline-end:28px;bottom:28px;width:60px;height:60px}}
 </style>
 </head>
 <body>
@@ -491,8 +492,8 @@ p,li,dd{text-wrap:pretty}
       <a href="#daniel">על דניאל</a>
       <a href="#faq">שאלות</a>
     </nav>
-    <a class="btn btn-sm header-cta" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
-      <svg aria-hidden="true"><use href="#i-wa"/></svg><span class="short">וואטסאפ</span><span class="long">לתאריכים ולהרשמה</span>
+    <a class="btn btn-sm header-cta" href="booking/">
+      <span class="short">הרשמה</span><span class="long">הרשמה לסדנה</span>
     </a>
   </div>
 </header>
@@ -507,9 +508,7 @@ p,li,dd{text-wrap:pretty}
         <h1>לחם מחמצת אמיתי.<br>מהידיים שלך.</h1>
         <p class="lede">בסדנה שלי תלמדי להכין לחם מחמצת אמיתי בבית, מהיכרות עם המחמצת ועד כיכר שתכיני במו ידייך. חוויה מרגיעה באווירה ביתית, עם בראנץ׳, יין וקינוח. ותצאי עם כיכר, מחמצת, ידע וביטחון להמשיך לאפות בעצמך.</p>
         <div class="hero-actions">
-          <a class="btn btn-main" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
-            <svg aria-hidden="true"><use href="#i-wa"/></svg><span>לתאריכים ולהרשמה<span class="opt"> בוואטסאפ</span></span>
-          </a>
+          <a class="btn btn-main" href="booking/">הרשמה לסדנה</a>
           <a class="btn btn-soft" href="#journey">מה עושים בסדנה</a>
         </div>
       </div>
@@ -695,9 +694,7 @@ p,li,dd{text-wrap:pretty}
 
     <div class="inline-cta">
       <p>רוצה להצטרף לסדנה הקרובה?</p>
-      <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
-        <svg aria-hidden="true"><use href="#i-wa"/></svg>לתאריכים ולהרשמה בוואטסאפ
-      </a>
+      <a class="btn" href="booking/">הרשמה לסדנה</a>
     </div>
   </div>
 </section>
@@ -919,7 +916,7 @@ p,li,dd{text-wrap:pretty}
       </details>
       <details>
         <summary>איפה זה, מתי וכמה זה עולה?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>הסדנאות מתקיימות בבית שלי באבן יהודה, עם עד 10 משתתפות בכל סדנה. לתאריכים הקרובים ולמחיר, שלחי לי הודעה בוואטסאפ ואחזור אלייך עם כל הפרטים.</p>
+        <p>הסדנאות מתקיימות בבית שלי באבן יהודה, עם עד 10 משתתפות בכל סדנה. התאריכים הקרובים והמחיר מחכים לך ב<a href="booking/">דף ההרשמה</a>, ושם גם שומרים מקום. יש לך שאלה? <a href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">שלחי לי הודעה בוואטסאפ</a>.</p>
       </details>
     </div>
   </div>
@@ -932,11 +929,9 @@ p,li,dd{text-wrap:pretty}
   </picture>
   <div class="wrap">
     <h2 id="final-title">הכיכר הראשונה שלך מחכה</h2>
-    <p>שלחי לי הודעה, ואחזור אלייך עם התאריכים הקרובים. נתראה סביב השולחן.</p>
-    <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%AA%D7%90%D7%A8%D7%99%D7%9B%D7%99%D7%9D%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%99%D7%9D%20%D7%95%D7%9C%D7%A9%D7%A8%D7%99%D7%99%D7%9F%20%D7%9E%D7%A7%D7%95%D7%9D%20%D7%91%D7%A1%D7%93%D7%A0%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
-      <svg aria-hidden="true"><use href="#i-wa"/></svg>שליחת הודעה בוואטסאפ
-    </a>
-    <p class="phone">או בטלפון: <a href="tel:+972547575775" dir="ltr">054-757-5775</a></p>
+    <p>בחרי מועד ושמרי לך מקום. נתראה סביב השולחן.</p>
+    <a class="btn" href="booking/">הרשמה לסדנה</a>
+    <p class="phone">שאלות? <a href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">בוואטסאפ</a> או בטלפון: <a href="tel:+972547575775" dir="ltr">054-757-5775</a></p>
   </div>
 </section>
 
@@ -957,11 +952,7 @@ p,li,dd{text-wrap:pretty}
   </div>
 </footer>
 
-<div class="sticky-cta" inert>
-  <a class="btn" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener">
-    <svg aria-hidden="true"><use href="#i-wa"/></svg>לתאריכים ולהרשמה בוואטסאפ
-  </a>
-</div>
+<a class="wa-float" href="https://wa.me/972547575775?text=%D7%94%D7%99%D7%99%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%21%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%94%D7%A7%D7%A8%D7%95%D7%91%D7%94%20%F0%9F%8D%9E" target="_blank" rel="noopener" aria-label="שליחת הודעה לדניאל בוואטסאפ"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
 <script>
 (function () {
@@ -1050,19 +1041,6 @@ p,li,dd{text-wrap:pretty}
     steps.forEach(function (s) { stepIO.observe(s); });
   }
 
-  var sticky = d.querySelector('.sticky-cta');
-  var heroCta = d.querySelector('.hero-actions');
-  var finalSec = d.querySelector('.final');
-  if (sticky && heroCta && finalSec && hasIO) {
-    var heroIn = true, finalIn = false;
-    var update = function () {
-      var show = !heroIn && !finalIn;
-      sticky.classList.toggle('is-shown', show);
-      sticky.inert = !show;
-    };
-    new IntersectionObserver(function (e) { heroIn = e[0].isIntersecting; update(); }).observe(heroCta);
-    new IntersectionObserver(function (e) { finalIn = e[0].isIntersecting; update(); }).observe(finalSec);
-  }
 })();
 </script>
 </body>

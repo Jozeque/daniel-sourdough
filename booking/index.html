@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>הרשמה לסדנה | דניאל אביב, סדנאות לחמי מחמצת</title>
+<meta name="description" content="המועדים הקרובים לסדנת לחמי המחמצת של דניאל אביב באבן יהודה. בוחרים מועד, משלמים בדף מאובטח, והמקום שמור.">
+<meta name="theme-color" content="#F7F4EF">
+<meta name="color-scheme" content="light">
+<!-- The booking backend: Daniel's Google Apps Script web app (booking/shell). On localhost the page uses /api. -->
+<meta name="booking-api" content="https://script.google.com/macros/s/AKfycbxx9UusizOtr7fnZuETGN9jIlgYeYVnXNwxEZ8DSHD_J2rXq_VfyyxZnMUMHWrbVhgltA/exec">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:url" content="https://danielle-aviv.com/booking/">
+<meta property="og:title" content="הרשמה לסדנת לחמי מחמצת עם דניאל אביב">
+<meta property="og:description" content="המועדים הקרובים, והמקומות שנשארו בכל אחד.">
+<meta property="og:image" content="https://danielle-aviv.com/og.jpg">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Bellefair&display=swap">
+<style>
+:root{
+  --flour:#F7F4EF;--linen:#EFE8DD;--paper:#FFFDF9;--crust:#7C4520;--crust-deep:#5F3317;
+  --ink:#2A1F17;--ink-2:#5B4A3E;--stone:#70665D;--rule:rgba(42,31,23,.14);--gold:#D3A26B;--bad:#9B2C1C;
+  --serif:"Bellefair","Frank Ruhl Libre","Times New Roman",serif;
+  --sans:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;overflow-x:clip;color:var(--ink);font:400 1.0625rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;
+  background:var(--flour) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .12 0 0 0 0 .08 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+a{color:var(--crust-deep);text-underline-offset:4px}
+a:hover{color:var(--crust)}
+p{margin:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
+[hidden]{display:none!important}
+.skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:10;background:var(--ink);color:var(--flour);padding:10px 16px;border-radius:10px;text-decoration:none}
+.skip:focus{top:12px}
+.bar,main,.foot{max-width:760px;margin-inline:auto;padding-inline:20px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;border-bottom:1px solid var(--rule)}
+.brand{font-family:var(--serif);font-size:1.85rem;line-height:1.1;color:var(--ink);text-decoration:none}
+.back{font-weight:700;text-decoration:none}
+main{padding-block:30px 56px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.12;margin:0;color:var(--ink);text-wrap:balance}
+h1{font-size:clamp(2.7rem,2.1rem + 2.4vw,3.7rem)}
+h2{font-size:clamp(1.95rem,1.7rem + .8vw,2.35rem)}
+.lead{margin-top:12px;font-size:1.12rem;color:var(--ink-2);max-width:32em;text-wrap:pretty}
+
+/* the dates */
+.dates{margin:30px 0 0;padding:0;border:0;min-width:0}
+.dates legend{padding:0;font-family:var(--serif);font-size:clamp(1.95rem,1.7rem + .8vw,2.35rem);line-height:1.12}
+.list{margin-top:12px}
+.date{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:14px;
+  padding:15px 14px;border-top:1px solid var(--rule);cursor:pointer;transition:background-color .15s ease;
+}
+.date:last-child{border-bottom:1px solid var(--rule)}
+.date:hover{background:rgba(239,232,221,.55)}
+.date.is-picked{background:var(--linen)}
+.date input{
+  appearance:none;-webkit-appearance:none;margin:0;width:24px;height:24px;border-radius:50%;flex:none;
+  border:2px solid var(--crust);background:var(--paper);display:grid;place-items:center;cursor:pointer;grid-row:span 2;
+}
+.date input::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--crust);transform:scale(0);transition:transform .15s ease}
+.date input:checked::after{transform:scale(1)}
+.date input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.d-when{font-family:var(--serif);font-size:1.6rem;line-height:1.2}
+.d-meta{grid-column:2;color:var(--ink-2)}
+.d-left{grid-row:1 / span 2;grid-column:3;text-align:end;font-weight:700;font-size:.98rem;color:var(--ink-2)}
+.d-left.is-few{color:var(--crust-deep)}
+.date.is-full{cursor:default;grid-template-columns:1fr auto}
+.date.is-full:hover{background:none}
+.date.is-full .d-when,.date.is-full .d-meta{color:var(--stone);grid-column:1}
+.date.is-full .d-left{grid-column:2;color:var(--stone)}
+.d-wait{grid-column:1 / -1;margin-top:4px;font-weight:700;font-size:.98rem}
+@media (max-width:559px){
+  .date{grid-template-columns:auto 1fr}
+  .date input{grid-row:span 3}
+  .d-left{grid-row:auto;grid-column:2;text-align:start}
+  .date.is-full{grid-template-columns:1fr}
+  .date.is-full .d-left{grid-column:1}
+}
+.state{margin-top:14px;color:var(--ink-2)}
+
+/* the form */
+.form{margin-top:34px;display:grid;gap:20px}
+.picked{font-family:var(--serif);font-size:1.7rem;line-height:1.2;scroll-margin-top:18px}
+.picked small{display:block;font-family:var(--sans);font-size:1rem;color:var(--ink-2)}
+.field label{display:block;font-weight:700;margin-bottom:6px}
+.field input,.field select{
+  width:100%;height:54px;padding:0 16px;border:1px solid rgba(42,31,23,.3);border-radius:14px;
+  background:var(--paper);color:var(--ink);font:400 1.0625rem/1.2 var(--sans);
+}
+.field select{appearance:none;-webkit-appearance:none;padding-inline-end:44px;cursor:pointer;
+  background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%235B4A3E' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat left 18px center}
+.field input:focus,.field select:focus{outline:3px solid var(--gold);outline-offset:1px}
+.field input[dir="ltr"]{text-align:right}
+.field .hint{margin-top:6px;font-size:.95rem;color:var(--stone)}
+.field .err,.check .err{margin-top:6px;font-size:.95rem;font-weight:600;color:var(--bad)}
+.field.is-bad input,.field.is-bad select{border-color:var(--bad)}
+.two{display:grid;gap:20px}
+@media (min-width:620px){.two{grid-template-columns:1fr 1fr}}
+.check{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:start}
+.check input{width:22px;height:22px;margin:3px 0 0;accent-color:var(--crust);cursor:pointer}
+.check .err{grid-column:2}
+.pay{display:grid;gap:14px;padding-top:6px;border-top:1px solid var(--rule)}
+.total{font-family:var(--serif);font-size:2rem;line-height:1.2;padding-top:14px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:56px;padding:0 28px;border-radius:999px;border:0;cursor:pointer;
+  background:var(--crust);color:#FBF6EE;text-decoration:none;font:700 1.0625rem/1.2 var(--sans);
+  box-shadow:0 12px 26px -14px rgba(95,51,23,.75);transition:background-color .2s ease,transform .2s ease;
+}
+.btn:hover{background:var(--crust-deep);color:#FBF6EE}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.7;cursor:progress}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-soft{background:rgba(124,69,32,.1);color:var(--crust-deep);box-shadow:none}
+.btn-soft:hover{background:rgba(124,69,32,.17);color:var(--crust-deep)}
+.form .btn{width:100%}
+@media (min-width:620px){.form .btn{width:auto;justify-self:start}}
+.small{font-size:.95rem;color:var(--stone)}
+.note{margin-top:22px;padding:14px 18px;border-radius:14px;background:var(--linen);color:var(--ink)}
+.note.is-bad{background:#F6E3DC}
+.hp{position:absolute;inset-inline-start:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* after paying */
+.result{display:grid;gap:14px;justify-items:start}
+.result p{color:var(--ink-2);font-size:1.12rem;max-width:32em}
+.result .when{font-family:var(--serif);font-size:1.7rem;line-height:1.25;color:var(--ink)}
+.result .btn{margin-top:10px}
+
+.foot{padding-block:22px 40px;border-top:1px solid var(--rule);font-size:.95rem;color:var(--ink-2);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 22px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5.25" y="10.75" width="13.5" height="9.5" rx="2"/><path d="M8.25 10.75V8a3.75 3.75 0 0 1 7.5 0v2.75"/></g></symbol>
+</svg>
+
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="bar">
+  <a class="brand" href="../">דניאל אביב</a>
+  <a class="back" href="../">לעמוד הסדנה</a>
+</header>
+
+<main id="main">
+  <section id="booking">
+    <h1>הרשמה לסדנה</h1>
+    <p class="lead">ארבע שעות של ידיים בבצק, בבית של דניאל באבן יהודה, עד 10 משתתפות. בחרי מועד, שלמי בדף מאובטח, והמקום שלך שמור.</p>
+
+    <div class="note" id="notice" role="status" hidden></div>
+
+    <form id="form" novalidate>
+      <fieldset class="dates">
+        <legend>מועדים קרובים</legend>
+        <div class="list" id="list"></div>
+        <p class="state" id="state">המועדים נטענים.</p>
+      </fieldset>
+
+      <div class="form" id="details" hidden>
+        <p class="picked" id="picked" tabindex="-1"></p>
+        <div class="field" data-f="name">
+          <label for="f-name">שם מלא</label>
+          <input id="f-name" name="name" autocomplete="name" maxlength="60" required>
+        </div>
+        <div class="two">
+          <div class="field" data-f="phone">
+            <label for="f-phone">טלפון נייד</label>
+            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" maxlength="20" required>
+          </div>
+          <div class="field" data-f="email">
+            <label for="f-email">אימייל</label>
+            <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" maxlength="100" required>
+            <p class="hint">לשם תישלח הקבלה.</p>
+          </div>
+        </div>
+        <div class="field" data-f="seats">
+          <label for="f-seats">כמה מקומות</label>
+          <select id="f-seats" name="seats"></select>
+        </div>
+        <div class="hp" aria-hidden="true"><label>אתר <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="check" data-f="terms">
+          <input id="f-terms" name="terms" type="checkbox">
+          <label for="f-terms">קראתי ואני מסכימה ל<a href="../terms.html" target="_blank" rel="noopener">תנאי ההרשמה והביטול</a></label>
+        </div>
+        <div class="pay">
+          <p class="total" id="total"></p>
+          <button class="btn" id="go" type="submit"><svg aria-hidden="true"><use href="#i-lock"/></svg><span>להמשך לתשלום מאובטח</span></button>
+          <p class="small">התשלום בדף המאובטח של Grow, באשראי או בביט. בזמן התשלום המקום שמור לך ל-15 דקות. הפרטים משמשים רק לתיאום הסדנה ולקבלה.</p>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="result" id="result" hidden aria-live="polite"></section>
+
+  <noscript><p class="note">כדי להירשם כאן צריך JavaScript. אפשר גם להירשם בווטסאפ: <a href="https://wa.me/972547575775">054-757-5775</a></p></noscript>
+</main>
+
+<footer class="foot">
+  <span>© 2026 דניאל אביב, סדנאות לחמי מחמצת, אבן יהודה</span>
+  <nav aria-label="קישורים">
+    <a href="../terms.html">תנאי ההרשמה והביטול</a>
+    <a href="../accessibility.html">הצהרת נגישות</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var PHONE = '972547575775';
+  var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var meta = document.querySelector('meta[name="booking-api"]');
+  var API = LOCAL ? '/api' : (meta && meta.content);
+  var POLLS = 20;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var list = $('list'), stateLine = $('state'), details = $('details'), form = $('form'), notice = $('notice');
+  var booking = $('booking'), result = $('result'), go = $('go');
+  var data = [], pick = null;
+
+  var dayFmt = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Asia/Jerusalem' });
+  function whenText(w) { return dayFmt.format(new Date(w.date + 'T12:00:00Z')); }
+  function hm(s) { return s ? s.replace(/^0/, '') : ''; }
+  function hoursText(w) { return w.start ? hm(w.start) + (w.end ? ' עד ' + hm(w.end) : '') : ''; }
+  function money(n) { return Number(n).toLocaleString('he-IL') + ' ₪'; }
+  function leftText(n) { return n <= 0 ? 'מלא' : n === 1 ? 'נשאר מקום אחד' : 'נשארו ' + n + ' מקומות'; }
+  function seatsText(n) { return n === 1 ? 'מקום אחד' : n + ' מקומות'; }
+  function wa(text) { return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text); }
+  function cleanId(s) { var m = /^b[0-9a-f]{12}/.exec(String(s || '').toLowerCase()); return m ? m[0] : ''; }
+  function store(k, v) { try { if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) {} }
+  function stored(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
+  var GENERAL_WA = wa('היי דניאל! הגעתי מדף ההרשמה באתר ואשמח לשמוע על הסדנה הקרובה 🍞');
+
+  function api(method, params, body, ms) {
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, ms || 20000);
+    var url = API + (params ? '?' + new URLSearchParams(params).toString() : '');
+    var opt = method === 'POST' ? { method: 'POST', body: JSON.stringify(body) } : {};
+    if (ctl) opt.signal = ctl.signal;
+    return fetch(url, opt).then(function (r) { return r.json(); }).finally(function () { clearTimeout(timer); });
+  }
+
+  function say(text, bad) {
+    notice.textContent = text;
+    notice.classList.toggle('is-bad', !!bad);
+    notice.hidden = !text;
+  }
+
+  function waButton(label, href, soft) {
+    var a = el('a', 'btn' + (soft ? ' btn-soft' : ''));
+    a.href = href; a.target = '_blank'; a.rel = 'noopener';
+    a.innerHTML = '<svg aria-hidden="true"><use href="#i-wa"/></svg>';
+    a.appendChild(el('span', '', label));
+    return a;
+  }
+
+  /* ---------- the list ---------- */
+
+  function load(keep) {
+    stateLine.hidden = false;
+    stateLine.textContent = 'המועדים נטענים.';
+    return api('GET', { action: 'workshops' }, null, 20000).then(function (r) {
+      if (!r || !r.ok) throw new Error('bad');
+      data = r.workshops || [];
+      render(keep);
+    }).catch(function () {
+      list.innerHTML = '';
+      details.hidden = true;
+      stateLine.textContent = 'לא הצלחנו לטעון את המועדים כרגע. אפשר לרענן את הדף, או להירשם בווטסאפ.';
+      stateLine.appendChild(document.createElement('br'));
+      stateLine.appendChild(waButton('להרשמה בווטסאפ', GENERAL_WA, true));
+    });
+  }
+
+  function render(keep) {
+    var keepId = keep && pick ? pick.id : null;
+    list.innerHTML = '';
+    pick = null;
+    if (!data.length) {
+      details.hidden = true;
+      stateLine.textContent = 'כרגע אין מועדים פתוחים להרשמה. כתבי לדניאל, ותשמעי ראשונה כשייפתח מועד חדש.';
+      stateLine.appendChild(document.createElement('br'));
+      stateLine.appendChild(waButton('לכתוב לדניאל', GENERAL_WA, true));
+      return;
+    }
+    stateLine.hidden = true;
+    data.forEach(function (w, i) {
+      var when = whenText(w), meta = [hoursText(w), money(w.price)].filter(Boolean).join(', ');
+      if (w.full) {
+        var row = el('div', 'date is-full');
+        row.appendChild(el('span', 'd-when', when));
+        row.appendChild(el('span', 'd-meta', meta));
+        row.appendChild(el('span', 'd-left', 'מלא'));
+        var a = el('a', 'd-wait', 'לרשימת ההמתנה בווטסאפ');
+        a.href = wa('היי דניאל! ראיתי שהסדנה ב' + when + ' מלאה. אשמח להצטרף לרשימת ההמתנה 🍞');
+        a.target = '_blank'; a.rel = 'noopener';
+        row.appendChild(a);
+        list.appendChild(row);
+        return;
+      }
+      var lab = el('label', 'date');
+      var input = el('input');
+      input.type = 'radio'; input.name = 'w'; input.value = String(i);
+      input.setAttribute('aria-label', when + ', ' + meta + ', ' + leftText(w.left));
+      lab.appendChild(input);
+      lab.appendChild(el('span', 'd-when', when));
+      lab.appendChild(el('span', 'd-meta', meta));
+      lab.appendChild(el('span', 'd-left' + (w.left <= 3 ? ' is-few' : ''), leftText(w.left)));
+      input.addEventListener('change', function () { choose(i, true); });
+      list.appendChild(lab);
+      if (keepId && w.id === keepId) { input.checked = true; choose(i, false); }
+    });
+    if (!pick) details.hidden = true;
+  }
+
+  function choose(i, scroll) {
+    pick = data[i];
+    Array.prototype.forEach.call(list.querySelectorAll('.date'), function (row) {
+      var input = row.querySelector('input');
+      row.classList.toggle('is-picked', !!(input && input.checked));
+    });
+    var picked = $('picked');
+    picked.textContent = whenText(pick);
+    var small = el('small', '', [hoursText(pick), money(pick.price) + ' למקום'].filter(Boolean).join(', '));
+    picked.appendChild(small);
+    var sel = $('f-seats'), had = Number(sel.value) || 1;
+    sel.innerHTML = '';
+    for (var n = 1; n <= pick.max; n++) {
+      var o = el('option', '', seatsText(n));
+      o.value = String(n);
+      sel.appendChild(o);
+    }
+    sel.value = String(Math.min(had, pick.max));
+    total();
+    details.hidden = false;
+    if (scroll) {
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      picked.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      picked.focus({ preventScroll: true });
+    }
+  }
+
+  function total() {
+    if (!pick) return;
+    $('total').textContent = 'לתשלום: ' + money(pick.price * Number($('f-seats').value || 1));
+  }
+  $('f-seats').addEventListener('change', total);
+
+  /* ---------- sending ---------- */
+
+  var MESSAGES = {
+    name: 'צריך שם פרטי ושם משפחה, בעברית או באנגלית',
+    phone: 'צריך מספר נייד, למשל 050-1234567',
+    email: 'צריך כתובת אימייל, לשם תישלח הקבלה',
+    seats: 'אפשר להירשם כאן לעד 4 מקומות. ליותר, כתבי לדניאל',
+    terms: 'צריך לאשר את תנאי ההרשמה והביטול'
+  };
+
+  function clearErrors() {
+    Array.prototype.forEach.call(form.querySelectorAll('[data-f]'), function (f) {
+      f.classList.remove('is-bad');
+      var e = f.querySelector('.err');
+      if (e) e.remove();
+      var input = f.querySelector('input,select');
+      if (input) input.removeAttribute('aria-invalid');
+    });
+  }
+
+  function showErrors(bad) {
+    var first = null;
+    Object.keys(bad).forEach(function (k) {
+      var f = form.querySelector('[data-f="' + k + '"]');
+      if (!f) return;
+      f.classList.add('is-bad');
+      var input = f.querySelector('input,select');
+      var msg = el('p', 'err', MESSAGES[k]);
+      msg.id = 'err-' + k;
+      f.appendChild(msg);
+      if (input) { input.setAttribute('aria-invalid', 'true'); input.setAttribute('aria-describedby', msg.id); }
+      if (!first && input) first = input;
+    });
+    if (first) first.focus();
+  }
+
+  // An error goes away as soon as that field is touched again.
+  form.addEventListener('input', fixed);
+  form.addEventListener('change', fixed);
+  function fixed(ev) {
+    var f = ev.target.closest && ev.target.closest('[data-f]');
+    if (!f || !f.classList.contains('is-bad')) return;
+    f.classList.remove('is-bad');
+    var e = f.querySelector('.err');
+    if (e) e.remove();
+    var input = f.querySelector('input,select');
+    if (input) { input.removeAttribute('aria-invalid'); input.removeAttribute('aria-describedby'); }
+  }
+
+  function check(v) {
+    var bad = {};
+    // The same rules as the server (Grow's): a first and a last name of 2+ letters each, an Israeli mobile number.
+    var words = v.name.replace(/[^א-תa-zA-Z0-9 .\-]/g, ' ').split(/\s+/).filter(function (w) {
+      return (w.match(/[א-תa-zA-Z]/g) || []).length >= 2;
+    });
+    if (words.length < 2) bad.name = 1;
+    var d = v.phone.replace(/\D/g, '');
+    if (d.indexOf('972') === 0) d = '0' + d.slice(3);
+    if (!/^05\d{8}$/.test(d)) bad.phone = 1;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)) bad.email = 1;
+    if (!v.terms) bad.terms = 1;
+    return bad;
+  }
+
+  function busy(on) {
+    go.disabled = on;
+    go.querySelector('span').textContent = on ? 'פותחים את דף התשלום' : 'להמשך לתשלום מאובטח';
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!pick) return;
+    clearErrors();
+    say('');
+    var v = {
+      action: 'hold', workshop: pick.id, seats: Number($('f-seats').value || 1),
+      name: form.elements.name.value.trim(), phone: form.elements.phone.value.trim(),
+      email: form.elements.email.value.trim(), terms: form.elements.terms.checked, website: form.elements.website.value
+    };
+    var bad = check(v);
+    if (Object.keys(bad).length) { showErrors(bad); return; }
+    busy(true);
+    api('POST', null, v, 30000).then(function (r) {
+      if (r && r.ok && r.payUrl) {
+        store('dav-b', r.booking);
+        location.href = r.payUrl;
+        return;
+      }
+      busy(false);
+      failed(r || {});
+    }).catch(function () {
+      busy(false);
+      say('משהו השתבש בחיבור. נסי שוב בעוד רגע.', true);
+    });
+  });
+
+  function failed(r) {
+    if (r.error === 'fields') { showErrors(r.fields || {}); return; }
+    if (r.error === 'full' || r.error === 'seats' || r.error === 'closed') {
+      say(r.error === 'closed' ? 'ההרשמה למועד הזה נסגרה. אפשר לבחור מועד אחר.'
+        : r.error === 'full' ? 'בדיוק עכשיו נתפסו המקומות האחרונים במועד הזה. אפשר לבחור מועד אחר.'
+        : 'בדיוק עכשיו נתפסו מקומות. ' + (r.left === 1 ? 'נשאר מקום אחד.' : 'נשארו ' + r.left + ' מקומות.'), true);
+      load(r.error === 'seats');
+      notice.scrollIntoView({ block: 'center' });
+      return;
+    }
+    if (r.error === 'payments_off') {
+      say('ההרשמה עם תשלום באתר עוד לא פתוחה. בינתיים אפשר להירשם בווטסאפ.', true);
+      notice.appendChild(document.createElement('br'));
+      notice.appendChild(waButton('להרשמה בווטסאפ', GENERAL_WA, true));
+      return;
+    }
+    say('משהו השתבש בפתיחת דף התשלום. נסי שוב בעוד רגע, או כתבי לדניאל בווטסאפ.', true);
+  }
+
+  /* ---------- back from Grow ---------- */
+
+  function showResult(parts) {
+    booking.hidden = true;
+    result.hidden = false;
+    result.innerHTML = '';
+    parts.forEach(function (p) { result.appendChild(p); });
+    var h = result.querySelector('h2');
+    if (h) { h.tabIndex = -1; h.focus(); }
+    window.scrollTo(0, 0);
+  }
+
+  function home(soft) {
+    var a = el('a', 'btn' + (soft ? ' btn-soft' : ''), 'חזרה לעמוד הסדנה');
+    a.href = '../';
+    return a;
+  }
+
+  function whenLine(st) {
+    if (!st.workshop) return null;
+    return el('p', 'when', whenText(st.workshop) + (st.workshop.start ? ', ' + hoursText(st.workshop) : ''));
+  }
+
+  function poll(id, n) {
+    if (n === 0) {
+      showResult([el('h2', '', 'רגע, מאשרים את המקום שלך'), el('p', '', 'זה לוקח כמה שניות.')]);
+    }
+    api('GET', { action: 'status', b: id }, null, 15000).then(function (st) {
+      if (st && st.state === 'paid') {
+        store('dav-b', null);
+        showResult([
+          el('h2', '', (st.seats > 1 ? 'המקומות שלך שמורים' : 'המקום שלך שמור') + (st.firstName ? ', ' + st.firstName : '')),
+          whenLine(st), el('p', '', seatsText(st.seats) + '. דניאל תצרף אותך לקבוצת הווטסאפ של הסדנה, עם הכתובת וכל מה שכדאי לדעת לפני.'),
+          el('p', '', 'את הקבלה על התשלום תקבלי במייל.'), home(false)
+        ].filter(Boolean));
+        return;
+      }
+      if (st && st.state === 'paid_no_seat') {
+        store('dav-b', null);
+        showResult([
+          el('h2', '', 'התשלום התקבל'),
+          el('p', '', 'בדיוק לפני שהתשלום הושלם, המקום האחרון בסדנה הזאת נתפס. דניאל תחזור אלייך בהקדם, כדי למצוא לך מקום או להחזיר לך את התשלום.'),
+          waButton('לכתוב לדניאל', wa('היי דניאל! שילמתי באתר על סדנה, וכתוב שהמקום האחרון נתפס.'), false), home(true)
+        ]);
+        return;
+      }
+      if (n < POLLS) { setTimeout(function () { poll(id, n + 1); }, 2000); return; }
+      slow();
+    }).catch(function () {
+      if (n < POLLS) { setTimeout(function () { poll(id, n + 1); }, 3000); return; }
+      slow();
+    });
+  }
+
+  function slow() {
+    showResult([
+      el('h2', '', 'התשלום בבדיקה'),
+      el('p', '', 'האישור עוד לא הגיע אלינו. אם התשלום עבר, המקום שמור לך ודניאל תאשר לך בווטסאפ. אפשר גם לכתוב לה עכשיו.'),
+      waButton('לכתוב לדניאל', wa('היי דניאל! שילמתי עכשיו באתר על סדנה ורציתי לוודא שהמקום שמור 🍞'), false), home(true)
+    ]);
+  }
+
+  var qs = new URLSearchParams(location.search);
+  var back = qs.get('r');
+  var id = cleanId(qs.get('b')) || cleanId(qs.get('cField1')) || cleanId(stored('dav-b'));
+  if (back === 'ok' && id) {
+    poll(id, 0);
+  } else {
+    if (back === 'cancel') {
+      store('dav-b', null);
+      say('התשלום בוטל, והמקום לא נשמר. אפשר לבחור שוב.');
+      history.replaceState(null, '', location.pathname);
+      if (id) {
+        // Free the seats first, so the list right after shows them free.
+        api('POST', null, { action: 'release', booking: id }, 15000).then(function () { load(false); }, function () { load(false); });
+        return;
+      }
+    }
+    load(false);
+  }
+})();
+</script>
+</body>
+</html>
