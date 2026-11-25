@@ -159,19 +159,6 @@ p,li,dd{text-wrap:pretty}
   box-shadow:0 22px 40px -22px rgba(42,31,23,.6);
 }
 .hero-crumb img{width:100%;height:100%;object-fit:cover}
-/* phones and tablets: faded photos of breads and the workshop peek out from behind the arch and fill the
-   margins beside it. Each runs from 16px under the arch's edge to 8px short of the screen edge (the frame
-   is centred, so each margin is (100vw - frame width) / 2), and is never wider than 160px. On tall phones
-   the tiles are narrow, so the crop leans outward to keep each photo's middle in the part that shows. */
-.hero-side{position:absolute;inset:0;pointer-events:none}
-.hero-side img{position:absolute;width:min(calc((100vw - 100%) / 2 + 8px),160px);object-fit:cover;border-radius:14px;opacity:.42}
-.hero-side .s-r{left:calc(100% - 16px);object-position:25% 50%}
-.hero-side .s-l{right:calc(100% - 16px);object-position:75% 50%}
-.side-1{top:2%;height:30%}
-.side-2{top:35%;height:30%}
-.side-3{top:68%;height:30%}
-.side-4{top:6%;height:33%}
-.side-5{top:42%;height:33%} /* the crumb sits below it, from 78% down */
 .hero-facts{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
 .hero-facts li{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:18px 4px 18px 12px;border-bottom:1px solid var(--rule)}
 .hero-facts li:nth-child(odd){border-inline-end:1px solid var(--rule)}
@@ -203,15 +190,12 @@ p,li,dd{text-wrap:pretty}
   .hero-facts li:nth-child(even){padding-inline-start:18px}
   .hero-facts svg{margin-top:3px}
   .hero-crumb{inset-inline-end:-17%;bottom:-4%;width:40%}
-  .hero-side{display:none}
 }
 @media (prefers-reduced-motion:no-preference){
   .arch-rise video,.arch-rise img{animation:rise 1.5s cubic-bezier(.2,.7,.2,1) both}
   .hero-crumb{animation:settle 1s .55s cubic-bezier(.2,.8,.25,1.15) both}
-  .hero-side img{animation:side-in 1.4s .7s ease both}
   @keyframes rise{from{opacity:0;transform:translateY(5%) scale(1.07)}to{opacity:1;transform:none}}
   @keyframes settle{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
-  @keyframes side-in{from{opacity:0}}
 }
 
 /* sections */
@@ -531,13 +515,6 @@ p,li,dd{text-wrap:pretty}
       </div>
       <div class="hero-media">
         <div class="hero-frame">
-          <div class="hero-side" aria-hidden="true">
-            <img class="s-r side-1" src="assets/img/side-1-240.webp" srcset="assets/img/side-1-240.webp 240w, assets/img/side-1-360.webp 360w" sizes="(min-width: 760px) 160px, 80px" width="240" height="360" loading="lazy" decoding="async" alt="">
-            <img class="s-r side-2" src="assets/img/side-2-240.webp" srcset="assets/img/side-2-240.webp 240w, assets/img/side-2-360.webp 360w" sizes="(min-width: 760px) 160px, 80px" width="240" height="360" loading="lazy" decoding="async" alt="">
-            <img class="s-r side-3" src="assets/img/side-3-240.webp" srcset="assets/img/side-3-240.webp 240w, assets/img/side-3-360.webp 360w" sizes="(min-width: 760px) 160px, 80px" width="240" height="360" loading="lazy" decoding="async" alt="">
-            <img class="s-l side-4" src="assets/img/side-4-240.webp" srcset="assets/img/side-4-240.webp 240w, assets/img/side-4-360.webp 360w" sizes="(min-width: 760px) 160px, 80px" width="240" height="360" loading="lazy" decoding="async" alt="">
-            <img class="s-l side-5" src="assets/img/side-5-240.webp" srcset="assets/img/side-5-240.webp 240w, assets/img/side-5-360.webp 360w" sizes="(min-width: 760px) 160px, 80px" width="240" height="360" loading="lazy" decoding="async" alt="">
-          </div>
           <div class="film arch-rise">
             <video muted playsinline loop preload="none" poster="assets/img/workshop-poster.webp" aria-label="סרטון קצר מתוך סדנת לחמי המחמצת">
               <source src="assets/video/workshop.mp4" type="video/mp4">
