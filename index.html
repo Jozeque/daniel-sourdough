@@ -209,13 +209,14 @@ p,li,dd{text-wrap:pretty}
 
 /* testimonials */
 /* video strip at the top of the section: a swipe strip on phones (the next video peeks in), all four side by
-   side on desktop. A tap plays one with sound and Hebrew captions; one plays at a time, none plays on its own. */
+   side on desktop in a row as wide as the quote below it (880px), so no card is taller than about 365px.
+   A tap plays one with sound and Hebrew captions; one plays at a time, none plays on its own. */
 .vids{
   list-style:none;margin:36px calc(var(--gutter) * -1) 0;padding:4px var(--gutter) 8px;
   display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;
 }
 .vids::-webkit-scrollbar{display:none}
-.vids > li{flex:0 0 64%;scroll-snap-align:center}
+.vids > li{flex:0 0 56%;scroll-snap-align:center}
 .vid{margin:0}
 .vid-frame{position:relative;aspect-ratio:9/16;overflow:hidden;border-radius:22px;background:#2A1F17;box-shadow:0 30px 50px -36px rgba(42,31,23,.75)}
 .vid-frame video{width:100%;height:100%;object-fit:cover}
@@ -235,9 +236,9 @@ p,li,dd{text-wrap:pretty}
 .vid cite{font-style:normal;font-weight:700;color:var(--crust)}
 .vid figcaption span{font-size:.88rem;color:var(--stone)}
 .vid video::cue{font:600 15px/1.4 var(--sans);color:#FBF6EE;background:rgba(32,23,17,.8)}
-@media (min-width:760px){.vids > li{flex-basis:29%}}
+@media (min-width:760px){.vids > li{flex-basis:min(29%,205px)}}
 @media (min-width:980px){
-  .vids{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;overflow:visible;margin-inline:0;padding-inline:0}
+  .vids{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;overflow:visible;margin-inline:0;padding-inline:0;max-width:880px}
 }
 .featured{margin:40px 0 0;max-width:880px}
 .featured blockquote{margin:0}
